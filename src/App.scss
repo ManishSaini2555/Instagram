@@ -1,0 +1,53 @@
+@import "@styles/main.scss";
+@import "@styles/global.scss";
+@import "@styles/colors.scss";
+
+.App {
+  font-family: "Krub";
+
+
+  .Toastify__toast-container {
+    // To make toaster above the loader.
+    z-index: 99999;
+  }
+  .Toastify__toast-body div {
+    display: flex;
+    margin-right: 12px;
+  }
+
+  .toasterSuccess.Toastify__toast-theme--light {
+    background-color: #ecfdf5 !important;
+    color: #047857 !important;
+    font-size: 0.8125rem !important;
+    line-height: 1.25rem;
+    font-family: Krub;
+    font-weight: 500;
+
+    .Toastify__toast-icon svg {
+      color: #059669 !important;
+      width: 1.25rem;
+      height: 1.25rem;
+      fill: #059669 !important;
+      margin-bottom: 0.3rem;
+    }
+
+    .Toastify__close-button svg {
+      color: #059669 !important;
+      width: 1rem;
+      height: 1.125rem;
+      margin-top: 0.7rem;
+    }
+  }
+
+  .Toastify__close-button--light {
+    opacity: 1 !important;
+  }
+
+  .toasterSuccess.Toastify__toast-icon.Toastify--animate-icon.Toastify__zoom-enter {
+    margin-bottom: 1.25rem !important;
+  }
+
+  .Toastify__progress-bar--success {
+    background: #059669 !important;
+  }
+}

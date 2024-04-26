@@ -1,0 +1,37 @@
+@import '@styles/colors.scss';
+@import '@styles/media-mixins.scss';
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 1.125rem 0;
+  box-shadow: 0rem -0.25rem 0.5rem rgba(0, 0, 0, 0.16);
+  // position: relative;
+  background-color: #fff;
+  width: 100%;
+  // bottom: 0;
+  z-index: 10;
+  height: 70px;
+
+  .centerContainer {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .navigation {
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    span {
+      margin-left: 2.5rem;
+    }
+  }
+}
+
+@media (max-width: #{$mobile-plus}) {
+  .footer {
+    display: none;
+  }
+}

@@ -1,0 +1,91 @@
+.cardComponentWrapperCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 0.0625rem solid #dddddd;
+  border-radius: 0.375rem;
+  // padding: 0.75rem;
+  cursor: pointer;
+  div:last-child {
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  img {
+    width: 1.625rem;
+    height: 1.5rem;
+  }
+  &:focus-visible{
+    outline: 2px solid #2cc4ff;
+  }
+}
+
+.pointerToArrow {
+  cursor: auto !important;
+}
+
+.flightInfo {
+  display: flex;
+  flex-direction: column;
+
+  &Destination {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.9375rem;
+    color: #4c12a1;
+    margin: 0;
+    // text-transform: capitalize !important;
+  }
+
+  &Date {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.3125rem;
+    color: #757575;
+    margin: 0;
+  }
+  &Confirmation {
+    margin-top: 2px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.3125rem;
+    color: #757575;
+    margin: 0;
+    span {
+      font-weight: 500;
+    }
+  }
+}
+
+.canceledFlight {
+  color: var(--ui-system-red-red-600, #dc2626);
+  color: var(--ui-system-red-red-600, #dc2626);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.disruptBlock {
+  width: 100%;
+  padding: 0.5rem;
+
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  p {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0;
+  }
+  img {
+    width: 18px;
+    height: 18px;
+  }
+}

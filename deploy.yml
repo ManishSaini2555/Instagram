@@ -1,0 +1,187 @@
+stages:
+
+- stage: DEV
+  displayName: DEV_Stage
+  dependsOn: Build_and_Package
+  condition: succeeded()
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy to Storage Account
+    environment: 'manage-travel-dev'
+    pool:
+      name: xp-devops-buildagents-k8s-unbuntu
+    variables:
+    - group: 'dev-environment-variables'
+
+    strategy:
+      runOnce:
+        deploy:
+
+          steps:
+          # - script: |
+          #     azcopy_install_url="https://aka.ms/downloadazcopy-v10-linux"
+          #     curl -L $azcopy_install_url -o azcopy.tar.gz
+          #     tar xvzf azcopy.tar.gz --strip-components=1
+          #     ./azcopy --version  # Verify installation
+          #   displayName: 'Install azcopy'
+
+          # - task: AzureCLI@2
+          #   inputs:
+          #     azureSubscription: 'dev-web-service-connection'
+          #     scriptType: 'bash'
+          #     scriptLocation: 'inlineScript'
+          #     inlineScript: |
+          #       ./azcopy copy "$(sourceUrl)" "$(destinationUrl)" --recursive=true --overwrite=true
+          #   displayName: 'Copy contents from $web to web container'
+
+          - task: DownloadBuildArtifacts@0
+            displayName: 'Download build artifacts'
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'drop'
+              downloadPath: '$(Pipeline.Workspace)/drop'
+
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: $(azureSubscription)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                cd $(Pipeline.Workspace)/drop
+                az storage blob upload-batch --destination '$web/my-account' --source ./drop --account-name $(storageAccountName) --account-key $(storageAccountKey) --pattern '**' --overwrite --destination-path ''
+            displayName: 'Upload to Blob Storage'
+
+#           - checkout: self
+#             path: "Customer/Manage/v2.0/QA"
+#             clean: true
+#           - task: NodeTool@0
+#             inputs:
+#               versionSpec: '18.x'
+#             displayName: 'Install Node.js'
+
+#           - script: |
+#               npm install -g npm
+#             displayName: 'Install npm'
+
+#           - task: Npm@1
+#             displayName: 'npm custom'
+#             inputs:
+#               command: custom
+#               workingDir: "Customer/Manage/v2.0/QA"
+#               customCommand: 'install --force'
+
+#           - task: Npm@1
+#             displayName: 'Run Cypress - Smoke DEV'
+#             inputs:
+#               command: custom
+#               workingDir: "Customer/Manage/v2.0/QA"
+#               verbose: false
+#               customCommand: 'run cy:chrome-smoke-dev'
+
+# - stage: Rollback
+#   displayName: Rollback on Test Failure
+#   condition: failed()
+
+#   jobs:
+#   - job: Rollback
+#     displayName: Rollback Job
+#     pool:
+#       name: xp-devops-buildagents-k8s-unbuntu
+#     variables:
+#     - group: 'dev-environment-variables'
+#     steps:
+#     - script: |
+#         echo 'Installing azcopy...'
+#         azcopy_install_url="https://aka.ms/downloadazcopy-v10-linux"
+#         curl -L $azcopy_install_url -o azcopy.tar.gz
+#         tar xvzf azcopy.tar.gz --strip-components=1
+#         ./azcopy --version  # Verify installation
+#       displayName: 'Install azcopy'
+#     - script: |
+#         echo 'Cypress tests failed. Rolling back...'
+#         ./azcopy copy "$(websourceUrl)" "$(myaccountdestinationUrl)" --recursive=true --overwrite=true
+#       displayName: 'Rollback on test failure'
+
+
+- stage: UAT
+  displayName: UAT_Stage
+  dependsOn: DEV
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy to Storage Account
+    environment: 'manage-travel-uat'
+    pool:
+      name: xp-devops-buildagents-k8s-unbuntu
+    variables:
+    - group: 'uat-environment-variables'
+
+    strategy:
+      runOnce:
+        deploy:
+
+          steps:
+          - script: |
+              azcopy_install_url="https://aka.ms/downloadazcopy-v10-linux"
+              curl -L $azcopy_install_url -o azcopy.tar.gz
+              tar xvzf azcopy.tar.gz --strip-components=1
+              # ./azcopy --version  # Verify installation
+            displayName: 'Install azcopy'
+
+          - task: DownloadBuildArtifacts@0
+            displayName: 'Download build artifacts'
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'drop'
+              downloadPath: '$(Pipeline.Workspace)/drop'
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: 'dev-web-service-connection'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                cd $(Pipeline.Workspace)/drop
+                az storage blob upload-batch --destination '$web/my-account' --source ./drop --account-name $(storageAccountName) --account-key $(storageAccountKey) --pattern '**' --overwrite --destination-path ''
+            displayName: 'Upload to Blob Storage'
+
+- stage: PROD
+  displayName: PROD_Stage
+  dependsOn: UAT
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy to Storage Account
+    environment: 'manage-travel-prod'
+    pool:
+      name: xp-devops-buildagents-k8s01-ubuntu
+    variables:
+    - group: 'prod-environment-variables'
+
+    strategy:
+      runOnce:
+        deploy:
+
+          steps:
+          - script: |
+              azcopy_install_url="https://aka.ms/downloadazcopy-v10-linux"
+              curl -L $azcopy_install_url -o azcopy.tar.gz
+              tar xvzf azcopy.tar.gz --strip-components=1
+              # ./azcopy --version  # Verify installation
+            displayName: 'Install azcopy'
+
+          - task: DownloadBuildArtifacts@0
+            displayName: 'Download build artifacts'
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'drop'
+              downloadPath: '$(Pipeline.Workspace)/drop'
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: 'xp-prod-web-function'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                cd $(Pipeline.Workspace)/drop
+                az storage blob upload-batch --destination '$web/my-account' --source ./drop --account-name $(storageAccountName) --account-key $(storageAccountKey) --pattern '**' --overwrite --destination-path ''
+            displayName: 'Upload to Blob Storage'

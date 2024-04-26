@@ -1,0 +1,45 @@
+.landscape {
+  &Wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    align-items: flex-start;
+  }
+  &Width {
+    // width: 72%;
+    padding: 0 1rem;
+    max-width: 75rem;
+  }
+  // &Row{
+  //     gap: 19px;
+  // }
+  &Column {
+    gap: 1.5rem;
+    padding: 0;
+  }
+}
+.portrait {
+  &Wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+.tabletWidth {
+  width: 100%;
+  padding: 1.5rem;
+}
+.tabletViewContainer {
+  gap: 1.5rem;
+}
+.tabFlexWidth {
+  flex: 1 1 0;
+  gap: 1.5rem;
+
+  .resCont {
+    flex-basis: calc(50% - 1rem);
+  }
+  .walletCont {
+    flex: 1;
+  }
+}

@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+cd Customer/Manage/v2.0/components/Client
+
+npx lint-staged

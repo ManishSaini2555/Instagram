@@ -1,0 +1,45 @@
+stages:
+  - stage: Build_and_Package
+    displayName: Build and Package
+    jobs:
+      - job: Job_1
+        displayName: Agent job 1
+        pool:
+          name: xp-devops-buildagents-k8s-unbuntu
+          demands:
+            - Agent.Version -gtVersion 2.182.1
+        steps:
+          - checkout: self
+            path: "Customer/Manage/v2.0/components/Client"
+            clean: true
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "18.x"
+            displayName: "Install Node.js"
+          - script: |
+              npm install -g npm
+            displayName: "Install npm"
+          - script: |
+              apt-get update
+              apt-get install -y zip unzip
+            displayName: "Install zip and unzip"
+          - task: Npm@1
+            displayName: "npm custom"
+            inputs:
+              command: custom
+              workingDir: "Customer/Manage/v2.0/components/Client"
+              verbose: false
+              customCommand: "install --legacy-peer-deps"
+          - task: Npm@1
+            displayName: "npm run build"
+            inputs:
+              command: custom
+              workingDir: "Customer/Manage/v2.0/components/Client"
+              verbose: false
+              customCommand: "run build"
+          - task: ArchiveFiles@2
+            displayName: Archive $(Build.BinariesDirectory)
+          - task: PublishBuildArtifacts@1
+            displayName: "Publish Artifact: drop"
+            inputs:
+              PathtoPublish: "Customer/Manage/v2.0/components/Client/build"

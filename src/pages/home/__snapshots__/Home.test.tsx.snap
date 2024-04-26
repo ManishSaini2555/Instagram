@@ -1,0 +1,537 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders the header and footer 1`] = `
+<div
+  className="home"
+>
+  <header
+    className="header"
+  >
+    <div
+      className="mobileMenuIcon"
+      data-cypress="mobile-menu"
+      onClick={[Function]}
+    >
+      <img
+        alt="hamburger"
+        height={18}
+        src={
+          {
+            "process": [Function],
+          }
+        }
+      />
+    </div>
+    <div
+      className="centerContainer"
+      style={
+        {
+          "width": "",
+        }
+      }
+    >
+      <div
+        className="logo"
+      >
+        <img
+          alt="avelo-logo"
+          data-cypress="avelo-logo"
+          src={
+            {
+              "process": [Function],
+            }
+          }
+        />
+      </div>
+      <div
+        className="navigation"
+      >
+        <span
+          className="cursorPoint"
+          data-cypress="home-button"
+          onClick={[Function]}
+        >
+          Home
+        </span>
+        <span
+          className="cursorPoint"
+          data-cypress="flight-status"
+          onClick={[Function]}
+        >
+          Flight Status
+        </span>
+        <div
+          className="MuiStack-root navigation css-e53awj-MuiStack-root"
+        >
+          <div
+            className="buttonPos "
+            onMouseLeave={[Function]}
+          >
+            <button
+              aria-haspopup="true"
+              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium accountButton cursorPoint css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+              data-cypress="my-account"
+              disabled={false}
+              id="composition-button"
+              onBlur={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseOver={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+            >
+              My Account
+              <img
+                alt="arrow_icon"
+                className="arrow"
+                src={
+                  {
+                    "process": [Function],
+                  }
+                }
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className="accountName"
+      >
+        Hi, 
+        Seth
+      </div>
+    </div>
+  </header>
+  <div
+    className="landscapeWrapper py-3 landscapeWidth"
+    data-cypress="dashboard-component"
+  >
+    <div
+      className="componentWrapper"
+      data-cypress="welcome-message-section"
+      role="welcomeSection"
+    >
+      <p>
+        Welcome back, 
+        Seth
+      </p>
+    </div>
+    <div
+      className="d-flex flex-row landscapeRow align-items-start"
+    >
+      <div
+        className="d-flex flex-column landscapeColumn col-8 pr-3"
+      >
+        <div
+          className="listFlightWrapper boxShadow"
+          data-cypress="upcoming-flights-section"
+          role="upcomingTrips"
+        >
+          <p
+            className="upcomingFlightSubheading"
+          >
+            Upcoming trips
+          </p>
+          <div
+            className="cardComponentWrapper"
+            onClick={[Function]}
+          >
+            <div
+              className="flightInfo"
+            >
+              <p
+                className="flightInfoDestination"
+              >
+                Boise
+              </p>
+              <p
+                className="flightInfoDate"
+              >
+                June 05-12
+              </p>
+            </div>
+            <img
+              alt="aeroplaneIcon"
+              src={
+                {
+                  "process": [Function],
+                }
+              }
+            />
+          </div>
+          <div
+            className="cardComponentWrapper"
+            onClick={[Function]}
+          >
+            <div
+              className="flightInfo"
+            >
+              <p
+                className="flightInfoDestination"
+              >
+                Burbank
+              </p>
+              <p
+                className="flightInfoDate"
+              >
+                June 14
+              </p>
+            </div>
+            <img
+              alt="aeroplaneIcon"
+              src={
+                {
+                  "process": [Function],
+                }
+              }
+            />
+          </div>
+          <div
+            className="cardComponentWrapper"
+            onClick={[Function]}
+          >
+            <div
+              className="flightInfo"
+            >
+              <p
+                className="flightInfoDestination"
+              >
+                Boise
+              </p>
+              <p
+                className="flightInfoDate"
+              >
+                July 01-10
+              </p>
+            </div>
+            <img
+              alt="aeroplaneIcon"
+              src={
+                {
+                  "process": [Function],
+                }
+              }
+            />
+          </div>
+        </div>
+        <div
+          className="reservationWrapper flex-row align-items-center"
+          data-cypress="find-reservation-section"
+        >
+          <div
+            className="reservationText"
+            role="futureReservationInfo"
+          >
+            <p
+              className="reservationTextHeading"
+            >
+              Find my reservation
+            </p>
+            <p
+              className="reservationTextSubheading"
+            >
+              If your future reservation is not displayed above, find it here.
+            </p>
+          </div>
+          <div
+            className="reservationButton reservationButtonLandscape"
+          >
+            <button
+              className="yellowButton"
+              data-cypress="search-btn"
+              onClick={[Function]}
+            >
+              Search
+            </button>
+             
+          </div>
+        </div>
+        <div
+          className="promotionWrapper boxShadow"
+          data-cypress="promotion-card-section"
+        >
+          <div
+            dangerouslySetInnerHTML={
+              {
+                "__html": "<div class="cap-one-placement-wrapper"> <style>.cap-one-placement-wrapper{padding:16px}.cap-one-placement-wrapper *{box-sizing:border-box;font-family:"Krub",Arial,sans-serif}.cap-one-placement-wrapper .title{font-size:22px;color:#4c12a1;margin-bottom:0}.cap-one-placement-wrapper .rw2{display:flex;align-items:center}.cap-one-placement-wrapper .rw2 img{max-height:114px}.cap-one-placement-wrapper .rw2 .cl1{margin-right:30px}.cap-one-placement-wrapper .rw2 .cl1 ul li::marker{font-size:1.5rem;color:#ffcd00}.cap-one-placement-wrapper .rw3 a.butn{display:block;width:249px;max-width:100%;background:#ffcd00;padding:10px 20px;border-radius:20px;text-decoration:none;text-align:center;font-weight:700}@media screen and (max-width:600px){.cap-one-placement-wrapper .rw2{flex-direction:column-reverse;align-items:flex-start}.cap-one-placement-wrapper .cl2{align-self:center;margin:12px 0}.cap-one-placement-wrapper .rw3 a.butn{width:100%}}</style> <div class="rw1"> <h2 class="title">Earn up to a <strong>$200 Avelo statement credit</strong></h2> </div> <div class="rw2"> <div class="cl1"> <p>This exclusive Avelo-only offer includes these benefits:</p> <ul> <li>Up to $200 Avelo statement credit</li> <li>Free priority boarding on Avelo flights</li> <li>Earn 75K bonus miles</li> </ul> </div> <div class="cl2"> <img alt="Avelo Capital One card" src="https://www.aveloair.com/wp-content/uploads/2023/04/Avelo-Capital-One-1.png"> </div> </div> <div class="rw3"> <a href="https://www.aveloair.com/capital-one" class="butn">Learn More</a> </div> </div>",
+              }
+            }
+          />
+        </div>
+      </div>
+      <div
+        className="d-flex flex-column landscapeColumn col-4"
+      >
+        <div
+          className="walletWrapper"
+          data-cypress="wallet-summary-section"
+        >
+          <p
+            className="walletHeading"
+            role="walletInfo"
+          >
+            You have Avelo Travel Funds
+          </p>
+          <div
+            className="walletSummary"
+          >
+            <div
+              className="walletSummaryAmount"
+              role="availableAmountInfo"
+            >
+              <p
+                className="walletSummaryAmountQuantity"
+              >
+                $0
+              </p>
+              <p
+                className="walletSummaryAmountText"
+              >
+                Available
+              </p>
+            </div>
+            <div
+              className="walletSummaryMessage"
+              role="walletExpiringInfo"
+            >
+              <img
+                alt=""
+                src={
+                  {
+                    "process": [Function],
+                  }
+                }
+              />
+              <p>
+                $0 expires on 
+              </p>
+            </div>
+            <div
+              className="walletSummaryButton"
+            >
+              <button
+                data-cypress="add-fund"
+                onClick={[Function]}
+              >
+                My ATF Wallet
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          className="profileWrapper"
+          data-cypress="profile-card-section"
+        >
+          <p
+            className="profileTitle"
+            role="profileTitleInfo"
+          >
+            Profile
+          </p>
+          <p
+            className="profileUserName"
+            role="profileUserNameInfo"
+          >
+            Seth Dobbins
+          </p>
+          <div
+            className="profileCardData"
+            role="travelerInfo"
+          >
+            <p
+              className="profileCardDataLabel"
+            >
+              Known traveler:
+            </p>
+            <div
+              className="profileCardDataText"
+            >
+              <p />
+            </div>
+          </div>
+          <div
+            className="profileCardData"
+            role="homeAirportInfo"
+          >
+            <p
+              className="profileCardDataLabel"
+            >
+              Home airport:
+            </p>
+            <div
+              className="profileCardDataText"
+            >
+              <p />
+            </div>
+          </div>
+          <div
+            className="profileButton"
+          >
+            <button
+              className="yellowButton"
+              data-cypress="manage-profile-button"
+              onClick={[Function]}
+            >
+              Manage Profile
+            </button>
+          </div>
+        </div>
+        <div
+          className="paymentWrapper"
+          data-cypress="payment-card-section"
+          role="paymentCardInfo"
+        >
+          <p
+            className="paymentTitle"
+          >
+            Payment methods
+          </p>
+          <div
+            className="paymentDetails"
+          >
+            <div
+              className="paymentCardInfo"
+            >
+              <div
+                className="cardComponent"
+              >
+                <img
+                  alt=""
+                  src={
+                    {
+                      "process": [Function],
+                    }
+                  }
+                />
+                <div
+                  className="cardInfo d-flex align-items-center justify-content-between"
+                >
+                  <div
+                    className="d-flex align-items-center flex-wrap"
+                  >
+                    <div>
+                      <p
+                        className="cardInfoText"
+                      >
+                        CC ending: 
+                      </p>
+                      <p
+                        className="cardInfoText cardInfoDetail"
+                      >
+                        5265,
+                         
+                      </p>
+                    </div>
+                    <div>
+                      <p
+                        className="cardInfoText"
+                      >
+                        Exp: 
+                      </p>
+                      <p
+                        className="cardInfoText cardInfoDetail"
+                      >
+                        10/25
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="d-flex align-items-center justify-content-center"
+                  >
+                    <div
+                      className="primaryTag d-flex align-items-center justify-content-center"
+                    >
+                      <p>
+                        primary
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="paymentCardInfo"
+            >
+              <div
+                className="cardComponent"
+              >
+                <img
+                  alt=""
+                  src={
+                    {
+                      "process": [Function],
+                    }
+                  }
+                />
+                <div
+                  className="cardInfo d-flex align-items-center justify-content-between"
+                >
+                  <div
+                    className="d-flex align-items-center flex-wrap"
+                  >
+                    <div>
+                      <p
+                        className="cardInfoText"
+                      >
+                        CC ending: 
+                      </p>
+                      <p
+                        className="cardInfoText cardInfoDetail"
+                      >
+                        5864,
+                         
+                      </p>
+                    </div>
+                    <div>
+                      <p
+                        className="cardInfoText"
+                      >
+                        Exp: 
+                      </p>
+                      <p
+                        className="cardInfoText cardInfoDetail"
+                      >
+                        12/27
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="d-flex align-items-center justify-content-center"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <header
+    className="footer"
+  >
+    <div
+      className="centerContainer"
+    >
+      Copyright  
+      <img
+        alt="copyright"
+        src={
+          {
+            "process": [Function],
+          }
+        }
+      />
+        Avelo Airlines 2023
+    </div>
+  </header>
+</div>
+`;
