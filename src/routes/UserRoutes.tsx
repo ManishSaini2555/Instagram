@@ -1,4 +1,5 @@
 import Loader from '@src/common/components/loader/Loader'
+import { LoggedInRoutesEnum } from '@src/common/constants/constants'
 import Footer from '@src/components/footer/Footer'
 import Header from '@src/components/header/Header'
 import React, { Suspense, lazy } from 'react'
@@ -12,8 +13,8 @@ const UserRoutes: React.FC<{}> = ({}) => {
       <Header />
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/*" element={<Home />}></Route>
+          <Route path={LoggedInRoutesEnum.HOME} element={<Home />}></Route>
+          <Route path={LoggedInRoutesEnum.DEFAULT} element={<Home />}></Route>
         </Routes>
       </Suspense>
       <Footer />
