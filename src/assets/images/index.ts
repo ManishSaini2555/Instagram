@@ -4,6 +4,8 @@ import InstagramWord from './Instagram-Wordmark-Black-Logo.wine.svg'
 import GoogleIcon from './google-icon.svg'
 import InstagramPhone from './instagram-phone.png'
 import Loading from './Loading.svg'
+import ShowIcon from './ShowIcon.svg'
+import HideIcon from './HideIcon.svg'
 
 export {
   SpinnerGif,
@@ -11,5 +13,7 @@ export {
   InstagramWord,
   GoogleIcon,
   InstagramPhone,
-  Loading
+  Loading,
+  ShowIcon,
+  HideIcon
 }

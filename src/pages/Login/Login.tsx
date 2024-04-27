@@ -1,10 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Login.scss'
-import { GoogleIcon, InstagramPhone, InstagramWord, Loading } from '@images'
+import {
+  GoogleIcon,
+  HideIcon,
+  InstagramPhone,
+  InstagramWord,
+  Loading,
+  ShowIcon
+} from '@images'
+import { useNavigate } from 'react-router-dom'
 
 const LogIn: React.FC<{}> = ({}) => {
   const [isLoginDisabled, setIsLoginDisabled] = useState<boolean>(true)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const emailCheck = !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(
+      email
+    )
+    if (!emailCheck && password.length > 8) {
+      setIsLoginDisabled(false)
+    } else {
+      setIsLoginDisabled(true)
+    }
+  }, [email, password])
   return (
     <div className="login">
       <div className="base">
@@ -20,8 +43,26 @@ const LogIn: React.FC<{}> = ({}) => {
               className="insta-word"
             />
             <div className="form">
-              <input type="text" placeholder="Email" />
-              <input type="password" placeholder="Password" />
+              <div className="email">
+                <input
+                  type="text"
+                  placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="password-container">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <img
+                  src={showPassword ? ShowIcon : HideIcon}
+                  className="show-hide"
+                  alt="show"
+                  onClick={() => setShowPassword(!showPassword)}
+                />
+              </div>
               <button disabled={isLoginDisabled}>
                 {isLoading ? (
                   <img src={Loading} alt="loading" className="loading" />
@@ -46,7 +87,7 @@ const LogIn: React.FC<{}> = ({}) => {
           <div className="main-login">
             <div className="sign-up">
               Don't have an account?
-              <span> Sign up</span>
+              <span onClick={() => navigate('/create-user')}> Sign up</span>
             </div>
           </div>
           <div className="get-app">
