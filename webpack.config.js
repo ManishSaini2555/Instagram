@@ -1,10 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 const Dotenv = require('dotenv-webpack')
-const CompressionPlugin = require('compression-webpack-plugin')
-const BrotliPlugin = require('brotli-webpack-plugin')
 
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -13,7 +10,7 @@ module.exports = {
     filename: '[name].[contenthash].bundle.js',
     // publicPath: "/manage/", //for Deployed version
     // publicPath: '/my-account/' // for Deployed version
-    publicPath: "/", //for Local
+    publicPath: '/' //for Local
   },
   node: {
     __dirname: true

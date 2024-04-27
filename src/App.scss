@@ -1,10 +1,9 @@
-@import "@styles/main.scss";
-@import "@styles/global.scss";
-@import "@styles/colors.scss";
+@import '@styles/main.scss';
+@import '@styles/global.scss';
+@import '@styles/colors.scss';
 
 .App {
-  font-family: "Krub";
-
+  font-family: 'Krub';
 
   .Toastify__toast-container {
     // To make toaster above the loader.
