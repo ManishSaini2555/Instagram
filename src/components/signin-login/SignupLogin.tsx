@@ -4,6 +4,7 @@ import { GoogleIcon, HideIcon, InstagramWord, Loading, ShowIcon } from '@images'
 import { useNavigate } from 'react-router-dom'
 import {
   FormLabel,
+  ImageUrl,
   LoggedOutRoutesEnum,
   RedirectUrls,
   SignupLoginEnum,
@@ -234,14 +235,8 @@ const SignupLogin: React.FC<SignupLoginType> = ({ type }) => {
       <div className="get-app">
         <span className="text">{SignupLoginVariable.GET_APP}</span>
         <span>
-          <img
-            src="https://static.cdninstagram.com/rsrc.php/v3/yt/r/Yfc020c87j0.png"
-            alt="App store"
-          />
-          <img
-            src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png"
-            alt="App store"
-          />
+          <img src={ImageUrl.APPLE_STORE} alt="App store" />
+          <img src={ImageUrl.GOOGLE_PLAY} alt="Play store" />
         </span>
       </div>
     </div>

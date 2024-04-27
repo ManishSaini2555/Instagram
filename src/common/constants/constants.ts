@@ -47,3 +47,8 @@ export enum FormLabel {
   CONFIRM_PASSWORD = 'Confirm Password',
   PHONE_NUMBER = 'Phone Number'
 }
+
+export enum ImageUrl {
+  APPLE_STORE = 'https://static.cdninstagram.com/rsrc.php/v3/yt/r/Yfc020c87j0.png',
+  GOOGLE_PLAY = 'https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png'
+}
