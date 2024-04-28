@@ -10,6 +10,8 @@ import {
   SignupLoginEnum,
   SignupLoginVariable
 } from '@src/common/constants/constants'
+import { signInWithEmail, signInWithGoogle, signUp } from '@src/functions/Auth'
+import { toast } from 'react-toastify'
 
 interface SignupLoginType {
   type: SignupLoginEnum.SIGNUP | SignupLoginEnum.LOGIN
@@ -30,6 +32,40 @@ const SignupLogin: React.FC<SignupLoginType> = ({ type }) => {
   const redirectTo = (url: string) => {
     if (url) {
       window.location.href = url
+    }
+  }
+
+  const onSignIn = async () => {
+    setIsLoading(true)
+    try {
+      await signInWithEmail(email, password)
+      toast.success('User Logged in successfully')
+    } catch (err) {
+      console.error('Error while creating User', err)
+      toast.error('Log in failed')
+      toast.error(err?.code?.toString()?.split('/')[1])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const onSignUp = async () => {
+    setIsLoading(true)
+    const user = {
+      firstName,
+      lastName,
+      phoneNumber,
+      email
+    }
+    try {
+      await signUp(email, password, user)
+      toast.success('User signed up successfully')
+    } catch (err) {
+      console.error('Error while creating User', err)
+      toast.error('Sign up failed')
+      toast.error(err?.code?.toString()?.split('/')[1])
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -77,7 +113,7 @@ const SignupLogin: React.FC<SignupLoginType> = ({ type }) => {
                 {SignupLoginVariable.SIGNIN_MESSAGE}
               </div>
               <div className="social">
-                <div className="google">
+                <div className="google" onClick={() => signInWithGoogle()}>
                   <img src={GoogleIcon} alt="goole" height={16} width={16} />
                   {SignupLoginVariable.GOOGLE_LOGIN}
                 </div>
@@ -170,10 +206,7 @@ const SignupLogin: React.FC<SignupLoginType> = ({ type }) => {
             </div>
           )}
           {type == SignupLoginEnum.LOGIN ? (
-            <button
-              disabled={isLoginDisabled}
-              onClick={() => setIsLoading(true)}
-            >
+            <button disabled={isLoginDisabled} onClick={() => onSignIn()}>
               {isLoading ? (
                 <img src={Loading} alt="loading" className="loading" />
               ) : (
@@ -181,10 +214,7 @@ const SignupLogin: React.FC<SignupLoginType> = ({ type }) => {
               )}
             </button>
           ) : (
-            <button
-              disabled={isSignupDisabled}
-              onClick={() => setIsLoading(true)}
-            >
+            <button disabled={isSignupDisabled} onClick={() => onSignUp()}>
               {isLoading ? (
                 <img src={Loading} alt="loading" className="loading" />
               ) : (
@@ -201,7 +231,7 @@ const SignupLogin: React.FC<SignupLoginType> = ({ type }) => {
                 <div className="divider"></div>
               </div>
               <div className="social">
-                <div className="google">
+                <div className="google" onClick={() => signInWithGoogle()}>
                   <img src={GoogleIcon} alt="goole" height={16} width={16} />
                   {SignupLoginVariable.GOOGLE_LOGIN}
                 </div>

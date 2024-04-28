@@ -10,7 +10,7 @@ const UserRoutes: React.FC<{}> = ({}) => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path={LoggedInRoutesEnum.HOME} element={<Home />}></Route>

@@ -1,4 +1,7 @@
-import React, { createContext, useContext, useState } from 'react'
+import { auth, db } from '@src/firebase/fire'
+import { onAuthStateChanged } from 'firebase/auth'
+import { doc, onSnapshot } from 'firebase/firestore'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
 interface UserContextType {
   user: any
@@ -20,6 +23,28 @@ const UserAuthProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [user, setUser] = useState<any>(null)
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+
+  useEffect(() => {
+    console.log('User data: ', user)
+  }, [user])
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        console.log(currentUser)
+        setIsLoggedIn(true)
+        onSnapshot(doc(db, 'users', currentUser.uid), (doc) => {
+          setUser(doc.data())
+        })
+      } else {
+        setIsLoggedIn(false)
+        setUser(null)
+      }
+    })
+    return () => {
+      unsubscribe()
+    }
+  }, [])
 
   return (
     <UserContext.Provider value={{ user, isLoggedIn }}>
