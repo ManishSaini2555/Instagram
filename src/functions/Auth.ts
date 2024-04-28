@@ -20,27 +20,36 @@ export const signInWithEmail = async (email: string, password: string) => {
 }
 
 export const signInWithGoogle = async () => {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result)
-      const token = credential?.accessToken
-      // The signed-in user info.
-      const user = result.user
-      console.log('Google user details: ', user)
-      // IdP data available using getAdditionalUserInfo(result)
-      const details = getAdditionalUserInfo(result)
-      console.log('Google user extra details: ', details)
+  try {
+    const result = await signInWithPopup(auth, provider)
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result)
+    const token = credential?.accessToken
+    // The signed-in user info.
+    const user = result.user
+    console.log('Google user details: ', user)
+    // IdP data available using getAdditionalUserInfo(result)
+    const details = getAdditionalUserInfo(result)
+    console.log('Google user extra details: ', details)
+    const userData = {
+      firstName: details?.profile?.given_name,
+      lastName: details?.profile?.family_name,
+      email: details?.profile?.email,
+      phoneNumber: user?.phoneNumber
+    }
+    await setDoc(doc(db, 'users', user.uid), {
+      uid: user.uid,
+      ...userData
     })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code
-      const errorMessage = error.message
-      // The email of the user's account used.
-      const email = error.customData.email
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error)
-    })
+  } catch (error: any) {
+    // Handle Errors here.
+    const errorCode = error.code
+    const errorMessage = error.message
+    // The email of the user's account used.
+    const email = error.customData.email
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error)
+  }
 }
 
 export const logOut = async () => {
