@@ -12,6 +12,7 @@ import {
 } from '@src/common/constants/constants'
 import { signInWithEmail, signInWithGoogle, signUp } from '@src/functions/Auth'
 import { toast } from 'react-toastify'
+import OrContainer from '@src/common/components/or-container/OrContainer'
 
 interface SignupLoginType {
   type: SignupLoginEnum.SIGNUP | SignupLoginEnum.LOGIN
@@ -118,11 +119,7 @@ const SignupLogin: React.FC<SignupLoginType> = ({ type }) => {
                   {SignupLoginVariable.GOOGLE_LOGIN}
                 </div>
               </div>
-              <div className="or-container">
-                <div className="divider"></div>
-                <div>OR</div>
-                <div className="divider"></div>
-              </div>
+              <OrContainer />
               <div className="first-name">
                 <input
                   type="text"
@@ -225,18 +222,17 @@ const SignupLogin: React.FC<SignupLoginType> = ({ type }) => {
 
           {type == SignupLoginEnum.LOGIN && (
             <>
-              <div className="or-container">
-                <div className="divider"></div>
-                <div>OR</div>
-                <div className="divider"></div>
-              </div>
+              <OrContainer />
               <div className="social">
                 <div className="google" onClick={() => signInWithGoogle()}>
                   <img src={GoogleIcon} alt="goole" height={16} width={16} />
                   {SignupLoginVariable.GOOGLE_LOGIN}
                 </div>
               </div>
-              <div className="forget">
+              <div
+                className="forget"
+                onClick={() => navigate(LoggedOutRoutesEnum.FORGET_PASSWORD)}
+              >
                 {SignupLoginVariable.FORGET_PASSWORD}
               </div>
             </>

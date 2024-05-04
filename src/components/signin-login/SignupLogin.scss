@@ -59,7 +59,7 @@
         background-color: #1877f2;
       }
       button:disabled {
-        opacity: 0.7;
+        opacity: 0.4;
       }
       button {
         display: flex;
@@ -76,22 +76,6 @@
         padding: 7px 16px !important;
         .loading {
           animation: rotation 2s linear infinite;
-        }
-      }
-      .or-container {
-        display: flex;
-        width: 75%;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 600;
-        color: #737373;
-        font-size: 0.8125rem;
-        line-height: 1.1538;
-        margin: 1rem 0 1.5rem;
-        .divider {
-          width: 40%;
-          height: 1px;
-          background-color: #dbdbdb;
         }
       }
       .social {

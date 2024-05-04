@@ -1,0 +1,19 @@
+.or-container {
+  display: flex;
+  width: 75%;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: #737373;
+  font-size: 0.8125rem;
+  line-height: 1.1538;
+  margin: 1rem 0 1.5rem;
+  .divider {
+    width: 40%;
+    height: 1px;
+    background-color: #dbdbdb;
+  }
+}
+.or-container.noSpace {
+  margin: 0;
+}

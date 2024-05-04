@@ -6,6 +6,7 @@ import InstagramPhone from './instagram-phone.png'
 import Loading from './Loading.svg'
 import ShowIcon from './ShowIcon.svg'
 import HideIcon from './HideIcon.svg'
+import Lock from './Lock.svg'
 
 export {
   SpinnerGif,
@@ -15,5 +16,6 @@ export {
   InstagramPhone,
   Loading,
   ShowIcon,
-  HideIcon
+  HideIcon,
+  Lock
 }

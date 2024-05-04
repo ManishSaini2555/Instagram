@@ -2,6 +2,8 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAdditionalUserInfo,
+  sendPasswordResetEmail,
+  sendSignInLinkToEmail,
   signInWithEmailAndPassword,
   signInWithPopup
 } from 'firebase/auth'
@@ -9,6 +11,11 @@ import { db, auth } from '@src/firebase/fire'
 import { doc, setDoc } from 'firebase/firestore'
 
 const provider = new GoogleAuthProvider()
+
+const actionCodeSettings = {
+  url: window.location.origin,
+  handleCodeInApp: true
+}
 
 export const signInWithEmail = async (email: string, password: string) => {
   try {
@@ -72,6 +79,22 @@ export const signUp = async (
       ...userData
     })
     return user.user
+  } catch (error) {
+    throw error
+  }
+}
+
+export const sendLoginLink = async (email: string) => {
+  try {
+    await sendSignInLinkToEmail(auth, email, actionCodeSettings)
+  } catch (error) {
+    throw error
+  }
+}
+
+export const resetPassword = async (email: string) => {
+  try {
+    await sendPasswordResetEmail(auth, email)
   } catch (error) {
     throw error
   }

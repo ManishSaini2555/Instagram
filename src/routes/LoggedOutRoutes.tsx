@@ -9,7 +9,10 @@ const LoggedOutRoutes: React.FC<{}> = ({}) => {
   const CreateUser = lazy(
     async () => await import('@pages/create-user/CreateUser')
   )
-  const LogIn = lazy(async () => await import('@pages/Login/Login'))
+  const LogIn = lazy(async () => await import('@src/pages/login/Login'))
+  const ForgetPassword = lazy(
+    async () => await import('@pages/forget-password/ForgetPassword')
+  )
   return (
     <div>
       {/* <Header /> */}
@@ -19,6 +22,10 @@ const LoggedOutRoutes: React.FC<{}> = ({}) => {
           <Route
             path={LoggedOutRoutesEnum.CREATE_USER}
             element={<CreateUser />}
+          ></Route>
+          <Route
+            path={LoggedOutRoutesEnum.FORGET_PASSWORD}
+            element={<ForgetPassword />}
           ></Route>
           <Route path={LoggedOutRoutesEnum.DEFAULT} element={<LogIn />}></Route>
         </Routes>

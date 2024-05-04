@@ -6,6 +6,7 @@ export enum SignupLoginEnum {
 export enum LoggedOutRoutesEnum {
   HOME = '/',
   CREATE_USER = '/create-user',
+  FORGET_PASSWORD = '/forget-password',
   DEFAULT = '/*'
 }
 
@@ -37,6 +38,17 @@ export enum SignupLoginVariable {
   SIGNUP = 'Sign up',
   LOGIN = 'Log in',
   GET_APP = 'Get the app.'
+}
+
+export enum ForgetPasswordEnum {
+  TROUBLE = 'Trouble logging in?',
+  ENTER_DETAILS = "Enter your email, phone, or username and we'll send you a link to get back into your account.",
+  CREATE = 'Create new account',
+  BACK = 'Back to login',
+  NO_USER = 'No users found',
+  LINK_SENT = 'We sent an email to sainimanish255@gmail.com with a link to get back into your account.',
+  LOGIN_LINK = 'Send login link',
+  RESET_PASSWORD = 'Reset password'
 }
 
 export enum FormLabel {
