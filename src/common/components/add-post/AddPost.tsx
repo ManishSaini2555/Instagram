@@ -3,12 +3,13 @@ import './AddPost.scss'
 import { BackIcon, CrossIcon } from '@src/assets/images'
 import { createNewPost } from '@src/functions/Posts'
 import { postType } from '@src/common/types'
-import { UserAuth } from '@src/context/AuthContext'
 import { toast } from 'react-toastify'
 
-const AddPost: React.FC<{ closeAddPost: any }> = ({ closeAddPost }) => {
+const AddPost: React.FC<{ closeAddPost: any; user: any }> = ({
+  closeAddPost,
+  user
+}) => {
   const [preview, setPreview] = useState(null)
-  const user = UserAuth()
   const selectFile = () => {
     document.getElementById('input')?.click()
   }

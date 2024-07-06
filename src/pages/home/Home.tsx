@@ -31,7 +31,7 @@ const Home: React.FC<{}> = () => {
       <div className="logout">
         <button onClick={() => logOut()}>Log out</button>
       </div> */}
-      {showAddPost && <AddPost closeAddPost={setShowAddPost} />}
+      {showAddPost && <AddPost user={user} closeAddPost={setShowAddPost} />}
       <div className="side-navigation">
         <div>
           <div className="logo">
@@ -68,26 +68,17 @@ const Home: React.FC<{}> = () => {
         </div>
         <div className="nav-item" onClick={logOut}>
           <img src={MoreIcon} height={26} className="icon-nav" />
-          More
+          {/* More */}
+          Log out
         </div>
       </div>
       <div className="main-container">
         <div className="main-content">
           {posts.map((post: newPostType) => {
-            return (
-              <ContentPost
-                key={post.id}
-                firstName={post.firstName}
-                lastName={post.lastName}
-                likes={post.like.length}
-                comments={post.comment}
-                post={post.post}
-                timeStamp={post.timeStamp}
-              />
-            )
+            return <ContentPost key={post.id} post={post} user={user} />
           })}
         </div>
-        <div className="main-right">right</div>
+        {/* <div className="main-right">right</div> */}
       </div>
     </div>
   )

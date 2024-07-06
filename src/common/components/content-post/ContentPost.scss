@@ -1,6 +1,9 @@
 .post {
   width: 28rem;
   height: fit-content;
+  img {
+    cursor: pointer;
+  }
   .user-section {
     display: flex;
     justify-content: space-between;

@@ -40,13 +40,14 @@ export const readData = async (collectionName: any, id: any) => {
 export const updateData = async (collectionName: any, data: any, id: any) => {
   try {
     const docRef = doc(db, collectionName, id)
-    await updateDoc(docRef, { id, ...data })
+    await updateDoc(docRef, { ...data, id })
     console.log('Document successfully updated!!')
   } catch (error: any) {
     console.error(
       'Error updating document : ',
       error?.message ? error.message : error
     )
+    throw new Error(error)
   }
 }
 
