@@ -15,12 +15,10 @@ export const createData = async (collectionName: any, data: any) => {
   const id = v4()
   try {
     const docRef = doc(db, collectionName, id)
-    await setDoc(docRef, { id, ...data })
+    await setDoc(docRef, { ...data, id })
   } catch (error: any) {
-    console.error(
-      'Error creating document : ',
-      error?.message ? error.message : error
-    )
+    console.error(error?.message ? error.message : error)
+    throw new Error(error)
   }
 }
 
@@ -29,7 +27,6 @@ export const readData = async (collectionName: any, id: any) => {
     const docRef = doc(db, collectionName, id)
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
-      console.log('Document data : ', docSnap.data())
       return docSnap.data()
     } else console.log('No such document exists !!')
   } catch (error: any) {
@@ -68,18 +65,18 @@ export const deleteData = async (collectionName: any, id: any) => {
 
 export const readAllData = async (collectionName: string) => {
   try {
-    const newDataArray = []
+    const newDataArray: any = []
     const querySnapshot = await getDocs(collection(db, collectionName))
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, ' => ', doc.data())
       newDataArray.push(doc.data())
     })
+    return newDataArray
   } catch (error: any) {
     console.error('Error reading: ', error?.message ? error.message : error)
   }
 }
 
-export const listeToCollection = (collectionName: string, callback: any) => {
+export const listenToCollection = (collectionName: string, callback: any) => {
   const collectionRef = collection(db, collectionName)
   return onSnapshot(collectionRef, (querySnapshot) => {
     const newDataArray: any[] = []
