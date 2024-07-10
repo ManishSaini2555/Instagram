@@ -6,7 +6,7 @@
     "start": "webpack serve --mode development --open",
     "build": "webpack --mode production",
     "lint": "eslint ./src/**/*.{ts,tsx} --fix",
-    "deploy": "firebase deploy"
+    "deploy": "npm run build && firebase deploy"
   },
   "dependencies": {
     "@emotion/react": "11.10.6",

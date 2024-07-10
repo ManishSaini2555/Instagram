@@ -10,15 +10,19 @@ const AddPost: React.FC<{ closeAddPost: any; user: any }> = ({
   user
 }) => {
   const [preview, setPreview] = useState(null)
+  const [img, setImg] = useState<File>()
   const selectFile = () => {
     document.getElementById('input')?.click()
   }
-  const handleFileChange = (event: any) => {
-    const selectedFile = event.target.files[0]
-    if (selectedFile.size > 100000) {
-      toast.warning('Cannot select file more than 1mb')
-      return
-    }
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event?.target?.files?.length
+      ? event?.target?.files[0]
+      : ''
+    if (selectedFile) setImg(selectedFile)
+    // if (selectedFile.size > 100000) {
+    //   toast.warning('Cannot select file more than 1mb')
+    //   return
+    // }
 
     // For previewing the image (if it's an image file)
     const reader = new FileReader()
@@ -33,13 +37,14 @@ const AddPost: React.FC<{ closeAddPost: any; user: any }> = ({
   const sharePost = () => {
     const postData: postType = {
       id: '',
-      uid: user.user.uid,
-      post: preview ?? '',
+      uid: user?.uid,
+      post: '',
       like: [],
       comment: [],
       timeStamp: new Date().toISOString()
     }
-    createNewPost(postData)
+    if (img) createNewPost(postData, img)
+    else toast.error('Something went wrong, try again later')
   }
   return (
     <div className="add-post">
