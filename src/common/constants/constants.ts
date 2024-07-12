@@ -25,7 +25,7 @@ export enum RedirectUrls {
 export enum SignupLoginVariable {
   SIGNIN_MESSAGE = 'Sign up to see photos and videos from your friends.',
   GOOGLE_LOGIN = 'Log in with Google',
-  DETAIL_MESSAGE = 'People who use our service may have uploaded your contact information to Instagram. ',
+  DETAIL_MESSAGE = 'People who use our service may have uploaded your contact information to Igram. ',
   LEARN_MORE = 'Learn More',
   BY_SIGNUP = 'By signing up, you agree to our ',
   TERMS = 'Terms, ',

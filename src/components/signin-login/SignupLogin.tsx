@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './SignupLogin.scss'
-import { GoogleIcon, HideIcon, InstagramWord, Loading, ShowIcon } from '@images'
+import {
+  GoogleIcon,
+  HideIcon,
+  InstagramWord,
+  Loading,
+  MainLogo,
+  ShowIcon
+} from '@images'
 import { useNavigate } from 'react-router-dom'
 import {
   FormLabel,
@@ -101,12 +108,7 @@ const SignupLogin: React.FC<SignupLoginType> = ({ type }) => {
   return (
     <div className="signin-login">
       <div className="main-login">
-        <img
-          src={InstagramWord}
-          width={200}
-          height={70}
-          className="insta-word"
-        />
+        <img src={MainLogo} height={70} className="insta-word" />
         <div className="form">
           {type == SignupLoginEnum.SIGNUP && (
             <>

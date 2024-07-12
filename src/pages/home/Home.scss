@@ -8,43 +8,6 @@
   color: white;
   overflow: hidden; /* Ensure no overflow on the main home container */
 
-  .side-navigation {
-    flex: 1;
-    overflow-y: auto;
-    border-right: 2px solid #262626;
-    padding: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .logo {
-      padding: 1.5rem;
-      cursor: pointer;
-    }
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      color: #f5f5f5;
-      padding: 0.75rem;
-      margin: 0.5rem 0;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      border-radius: 0.5rem;
-      transition: background-color 0.5s ease;
-
-      &:hover {
-        background-color: #222;
-
-        .icon-nav {
-          transform: scale(1.1);
-          transition: transform 0.3s ease;
-        }
-      }
-    }
-  }
-
   .main-container {
     flex: 6;
     overflow-y: auto;
@@ -59,6 +22,24 @@
     }
     .main-right {
       flex: 1;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .main-container {
+      flex: 5 !important;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .main-container {
+      flex: 4 !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .main-container {
+      flex: 10 !important;
     }
   }
 }

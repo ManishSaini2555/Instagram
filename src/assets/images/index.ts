@@ -19,6 +19,8 @@ import CrossIcon from './Cross-icon.svg'
 import BackIcon from './Back-icon.svg'
 import ThreeDotsIcon from './Three-dots-icon.svg'
 import LikedIcon from './Liked-icon.svg'
+import LogOutIcon from './LogOut-icon.svg'
+import MainLogo from './Main-logo.jpeg'
 
 export {
   SpinnerGif,
@@ -41,5 +43,7 @@ export {
   SaveIcon,
   BackIcon,
   ThreeDotsIcon,
-  LikedIcon
+  LikedIcon,
+  LogOutIcon,
+  MainLogo
 }

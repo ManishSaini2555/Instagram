@@ -19,10 +19,10 @@ const AddPost: React.FC<{ closeAddPost: any; user: any }> = ({
       ? event?.target?.files[0]
       : ''
     if (selectedFile) setImg(selectedFile)
-    // if (selectedFile.size > 100000) {
-    //   toast.warning('Cannot select file more than 1mb')
-    //   return
-    // }
+    if (selectedFile?.size > 500000) {
+      toast.warning('Cannot select file more than 5mb')
+      return
+    }
 
     // For previewing the image (if it's an image file)
     const reader = new FileReader()
