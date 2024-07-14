@@ -60,6 +60,29 @@
     .view-comment {
       color: #a8a8a8;
       font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .hide-comment {
+      color: #a8a8a8;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .comments {
+      color: #a8a8a8;
+      font-size: 0.875rem;
+      cursor: default;
+      .comment-name {
+        color: #ffffff;
+        width: 1.5rem;
+        height: 1.5rem;
+        font-weight: 600;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        border-radius: 50%;
+        background-color: burlywood;
+        justify-content: center;
+      }
     }
     .add-comment {
       display: flex;

@@ -6,6 +6,8 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 interface UserContextType {
   user: any
   isLoggedIn: boolean
+  loading: boolean
+  setLoading: (loading: boolean) => void
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined)
@@ -23,6 +25,7 @@ const UserAuthProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [user, setUser] = useState<any>(null)
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     console.log('User data: ', user)
@@ -47,7 +50,7 @@ const UserAuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [])
 
   return (
-    <UserContext.Provider value={{ user, isLoggedIn }}>
+    <UserContext.Provider value={{ user, isLoggedIn, loading, setLoading }}>
       {children}
     </UserContext.Provider>
   )

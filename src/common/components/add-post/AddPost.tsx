@@ -4,11 +4,10 @@ import { BackIcon, CrossIcon } from '@src/assets/images'
 import { createNewPost } from '@src/functions/Posts'
 import { postType } from '@src/common/types'
 import { toast } from 'react-toastify'
+import { UserAuth } from '@src/context/AuthContext'
 
-const AddPost: React.FC<{ closeAddPost: any; user: any }> = ({
-  closeAddPost,
-  user
-}) => {
+const AddPost: React.FC<{ closeAddPost: any }> = ({ closeAddPost }) => {
+  const { user, setLoading } = UserAuth()
   const [preview, setPreview] = useState(null)
   const [img, setImg] = useState<File>()
   const selectFile = () => {
@@ -34,17 +33,25 @@ const AddPost: React.FC<{ closeAddPost: any; user: any }> = ({
     }
   }
 
-  const sharePost = () => {
-    const postData: postType = {
-      id: '',
-      uid: user?.uid,
-      post: '',
-      like: [],
-      comment: [],
-      timeStamp: new Date().toISOString()
+  const sharePost = async () => {
+    try {
+      setLoading(true)
+      const postData: postType = {
+        id: '',
+        uid: user?.uid,
+        post: '',
+        like: [],
+        comment: [],
+        timeStamp: new Date().toISOString()
+      }
+      if (img) {
+        await createNewPost(postData, img)
+        closeAddPost(false)
+      } else toast.error('Something went wrong, try again later')
+      setLoading(false)
+    } catch (e) {
+      setLoading(false)
     }
-    if (img) createNewPost(postData, img)
-    else toast.error('Something went wrong, try again later')
   }
   return (
     <div className="add-post">

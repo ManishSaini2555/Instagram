@@ -6,9 +6,10 @@ import AddPost from '@src/common/components/add-post/AddPost'
 import { getAllPosts } from '@src/functions/Posts'
 import { newPostType } from '@src/common/types'
 import SideNav from '@src/components/sidenav/SideNav'
+import Loader from '@src/common/components/loader/Loader'
 
 const Home: React.FC<{}> = () => {
-  const { user } = UserAuth()
+  const { user, loading } = UserAuth()
   const [showAddPost, setShowAddPost] = useState<boolean>(false)
   const [posts, setPosts] = useState<newPostType[]>([])
 
@@ -23,7 +24,8 @@ const Home: React.FC<{}> = () => {
       <div className="logout">
         <button onClick={() => logOut()}>Log out</button>
       </div> */}
-      {showAddPost && <AddPost user={user} closeAddPost={setShowAddPost} />}
+      {showAddPost && <AddPost closeAddPost={setShowAddPost} />}
+      {loading && <Loader />}
       <SideNav setShowAddPost={setShowAddPost} />
       <div className="main-container">
         <div className="main-content">

@@ -15,9 +15,22 @@ export interface postType {
   comment: commentType[]
 }
 
+export interface postTypeWithNewComment {
+  id: string
+  timeStamp: string
+  uid: string
+  post: string
+  like: string[]
+  comment: newCommentType[]
+}
+
 export interface commentType {
   uid: string
   value: string
 }
 
-export interface newPostType extends postType, userType {}
+export interface newCommentType extends commentType {
+  user: string
+}
+
+export interface newPostType extends postTypeWithNewComment, userType {}

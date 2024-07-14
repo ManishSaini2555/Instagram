@@ -11,6 +11,7 @@ interface ContentPostType {
 }
 const ContentPost: React.FC<ContentPostType> = ({ post, user }) => {
   const [comment, setComment] = useState<string>('')
+  const [showComment, setShowComment] = useState<boolean>(false)
   const [isLiked, setIsLiked] = useState<boolean>(false)
   const [likeCount, setLikeCount] = useState<number>(0)
 
@@ -87,10 +88,32 @@ const ContentPost: React.FC<ContentPostType> = ({ post, user }) => {
           <img src={SaveIcon} height={30} className="save" />
         </div>
         <div className="like-count"> {likeCount} likes</div>
-        <div className="view-comment">
-          {' '}
-          View all {post.comment.length} comments
-        </div>
+        {showComment ? (
+          <>
+            <div
+              className="hide-comment"
+              onClick={() => setShowComment(!showComment)}
+            >
+              Hide comments
+            </div>
+            <div className="comments">
+              {post.comment.map((comment, index) => (
+                <div key={index} className="comment-item">
+                  <span className="comment-name">{comment.user}</span>
+                  <span className="comment-text">{comment.value}</span>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div
+            className="view-comment"
+            onClick={() => setShowComment(!showComment)}
+          >
+            {' '}
+            View all {post.comment.length} comments
+          </div>
+        )}
         <div className="add-comment">
           <textarea
             name="comment"

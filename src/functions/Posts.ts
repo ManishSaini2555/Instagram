@@ -1,4 +1,11 @@
-import { newPostType, postType, userType } from '@src/common/types'
+import {
+  commentType,
+  newCommentType,
+  newPostType,
+  postType,
+  postTypeWithNewComment,
+  userType
+} from '@src/common/types'
 import { createData, readAllData, updateData } from './helper'
 import { toast } from 'react-toastify'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
@@ -9,8 +16,12 @@ export const getAllPosts = async () => {
   const tempArray: newPostType[] = []
   const posts = await readAllData('posts')
   const users = await readAllData('users')
-  posts.forEach((post: postType) => {
+  posts.forEach((post: postTypeWithNewComment) => {
     const user: userType = users.find((user: userType) => user.uid === post.uid)
+    post.comment.forEach((comment: newCommentType) => {
+      const user = users?.find((user: userType) => user?.uid === comment?.uid)
+      comment.user = user?.firstName[0] + user.lastName[0]
+    })
     tempArray.push({ ...post, ...user })
   })
   return tempArray
