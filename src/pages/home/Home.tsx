@@ -30,7 +30,7 @@ const Home: React.FC<{}> = () => {
       <div className="main-container">
         <div className="main-content">
           {posts.map((post: newPostType) => {
-            return <ContentPost key={post.id} post={post} user={user} />
+            return <ContentPost key={post.id} post={post} />
           })}
         </div>
         {/* <div className="main-right">right</div> */}

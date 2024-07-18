@@ -27,6 +27,7 @@ export interface postTypeWithNewComment {
 export interface commentType {
   uid: string
   value: string
+  timeStamp: string
 }
 
 export interface newCommentType extends commentType {

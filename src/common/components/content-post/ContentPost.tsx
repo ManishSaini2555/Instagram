@@ -4,43 +4,75 @@ import { LikeIcon, LikedIcon, SaveIcon } from '@src/assets/images'
 import { newPostType, postType } from '@src/common/types'
 import { displayDifferenceInterval } from '@src/common/utils'
 import { updatePost } from '@src/functions/Posts'
+import { UserAuth } from '@src/context/AuthContext'
 
 interface ContentPostType {
   post: newPostType
-  user: any
 }
-const ContentPost: React.FC<ContentPostType> = ({ post, user }) => {
+const ContentPost: React.FC<ContentPostType> = ({ post }) => {
+  const { user, setLoading } = UserAuth()
   const [comment, setComment] = useState<string>('')
   const [showComment, setShowComment] = useState<boolean>(false)
   const [isLiked, setIsLiked] = useState<boolean>(false)
   const [likeCount, setLikeCount] = useState<number>(0)
 
-  const likePost = () => {
-    const tempPayoad: postType = {
-      id: post.id,
-      timeStamp: post.timeStamp,
-      uid: post.uid,
-      post: post.post,
-      like: [...post.like, user.uid],
-      comment: post.comment
+  const likePost = async () => {
+    try {
+      setLoading(true)
+      const tempPayoad: postType = {
+        id: post.id,
+        timeStamp: post.timeStamp,
+        uid: post.uid,
+        post: post.post,
+        like: [...post.like, user.uid],
+        comment: post.comment
+      }
+      setIsLiked(!isLiked)
+      setLikeCount(likeCount + 1)
+      await updatePost(tempPayoad, 'Post liked successfully')
+    } finally {
+      setLoading(false)
     }
-    setIsLiked(!isLiked)
-    setLikeCount(likeCount + 1)
-    updatePost(tempPayoad, 'Post liked successfully')
   }
 
-  const unLikePost = () => {
-    const tempPayoad: postType = {
-      id: post.id,
-      timeStamp: post.timeStamp,
-      uid: post.uid,
-      post: post.post,
-      like: post.like.filter((id) => id != user.uid),
-      comment: post.comment
+  const unLikePost = async () => {
+    try {
+      setLoading(true)
+      const tempPayoad: postType = {
+        id: post.id,
+        timeStamp: post.timeStamp,
+        uid: post.uid,
+        post: post.post,
+        like: post.like.filter((id) => id != user.uid),
+        comment: post.comment
+      }
+      setIsLiked(!isLiked)
+      setLikeCount(likeCount - 1)
+      await updatePost(tempPayoad, 'Post unliked successfully')
+    } finally {
+      setLoading(false)
     }
-    setIsLiked(!isLiked)
-    setLikeCount(likeCount - 1)
-    updatePost(tempPayoad, 'Post unliked successfully')
+  }
+
+  const shareComment = async () => {
+    try {
+      setLoading(true)
+      const tempPayoad: postType = {
+        id: post.id,
+        timeStamp: post.timeStamp,
+        uid: post.uid,
+        post: post.post,
+        like: post.like,
+        comment: [
+          ...post.comment,
+          { uid: user.uid, value: comment, timeStamp: new Date().toISOString() }
+        ]
+      }
+      await updatePost(tempPayoad, 'Comment added successfully')
+      setComment('')
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -121,7 +153,11 @@ const ContentPost: React.FC<ContentPostType> = ({ post, user }) => {
             placeholder="Add a comment..."
             onChange={(e) => setComment(e.target.value)}
           ></textarea>
-          {comment && <div className="post-button">Post</div>}
+          {comment && (
+            <div className="post-button" onClick={shareComment}>
+              Post
+            </div>
+          )}
         </div>
       </div>
     </div>
