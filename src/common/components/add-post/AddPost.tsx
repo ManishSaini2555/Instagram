@@ -18,7 +18,7 @@ const AddPost: React.FC<{ closeAddPost: any }> = ({ closeAddPost }) => {
       ? event?.target?.files[0]
       : ''
     if (selectedFile) setImg(selectedFile)
-    if (selectedFile?.size > 500000) {
+    if (selectedFile?.size > 5000000) {
       toast.warning('Cannot select file more than 5mb')
       return
     }
