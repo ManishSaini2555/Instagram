@@ -9,18 +9,36 @@ import {
   ReelsIcon,
   SearchIcon
 } from '@images'
+import { useNavigate } from 'react-router-dom'
+import { LoggedInRoutesEnum } from '@src/common/constants/constants'
 
 interface SideNavType {
   setShowAddPost: React.Dispatch<React.SetStateAction<boolean>>
 }
 const SideNav: React.FC<SideNavType> = ({ setShowAddPost }) => {
+  const navigate = useNavigate()
+
   return (
     <div className="side-navigation">
       <div>
-        <div className="logo">
+        <div
+          className="logo"
+          onClick={() =>
+            navigate({
+              pathname: LoggedInRoutesEnum.HOME
+            })
+          }
+        >
           <img src={MainLogo} width="100%" className="insta-word" />
         </div>
-        <div className="nav-item">
+        <div
+          className="nav-item"
+          onClick={() =>
+            navigate({
+              pathname: LoggedInRoutesEnum.HOME
+            })
+          }
+        >
           <img src={HomeIcon} height={26} className="icon-nav" />
           <span className="nav-text">Home</span>
         </div>
@@ -36,7 +54,14 @@ const SideNav: React.FC<SideNavType> = ({ setShowAddPost }) => {
           <img src={CreateIcon} height={26} className="icon-nav" />
           <span className="nav-text">Create</span>
         </div>
-        <div className="nav-item">
+        <div
+          className="nav-item"
+          onClick={() =>
+            navigate({
+              pathname: LoggedInRoutesEnum.PROFILE
+            })
+          }
+        >
           <img src={HomeIcon} height={26} className="icon-nav" />
           <span className="nav-text">Profile</span>
         </div>

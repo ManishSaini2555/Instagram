@@ -1,0 +1,42 @@
+@import '@styles/colors.scss';
+
+.layout {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  background-color: black;
+  color: white;
+  overflow: hidden; /* Ensure no overflow on the main home container */
+
+  .main-container {
+    flex: 6;
+    overflow-y: auto;
+    height: 100%;
+    padding: 0.75rem;
+    display: flex;
+    .main-content {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .main-container {
+      flex: 5 !important;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .main-container {
+      flex: 4 !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .main-container {
+      flex: 10 !important;
+    }
+  }
+}

@@ -12,6 +12,7 @@ export enum LoggedOutRoutesEnum {
 
 export enum LoggedInRoutesEnum {
   HOME = '/',
+  PROFILE = '/profile',
   DEFAULT = '/*'
 }
 
