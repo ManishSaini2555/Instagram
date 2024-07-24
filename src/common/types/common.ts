@@ -4,6 +4,7 @@ export interface userType {
   lastName: string
   phoneNumber: string
   uid: string
+  profilePic: string
 }
 
 export interface postType {

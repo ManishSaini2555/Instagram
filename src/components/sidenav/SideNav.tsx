@@ -12,12 +12,14 @@ import {
 } from '@images'
 import { useNavigate } from 'react-router-dom'
 import { LoggedInRoutesEnum } from '@src/common/constants/constants'
+import { UserAuth } from '@src/context/AuthContext'
 
 interface SideNavType {
   setShowAddPost: React.Dispatch<React.SetStateAction<boolean>>
 }
 const SideNav: React.FC<SideNavType> = ({ setShowAddPost }) => {
   const navigate = useNavigate()
+  const { user } = UserAuth()
 
   return (
     <div className="side-navigation">
@@ -63,7 +65,13 @@ const SideNav: React.FC<SideNavType> = ({ setShowAddPost }) => {
             })
           }
         >
-          <img src={ProfileLogo} height={20} className="icon-nav" />
+          {user?.profilePic ? (
+            <div className="profile">
+              <img src={user?.profilePic} alt="profile-pic" />
+            </div>
+          ) : (
+            <img src={ProfileLogo} height={20} className="icon-nav" />
+          )}
           <span className="nav-text">Profile</span>
         </div>
       </div>

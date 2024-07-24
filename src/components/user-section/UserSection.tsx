@@ -15,11 +15,7 @@ const UserSection: React.FC<{}> = () => {
           <div className="profile-pic">
             <div className="image-container">
               {user?.profilePic ? (
-                <img
-                  src={user?.profilePic}
-                  width="100%"
-                  className="insta-word"
-                />
+                <img src={user?.profilePic} />
               ) : (
                 <div className="profile-fallback">{`${user?.firstName[0]} ${user?.lastName[0]}`}</div>
               )}

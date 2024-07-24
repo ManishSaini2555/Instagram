@@ -83,8 +83,15 @@ const ContentPost: React.FC<ContentPostType> = ({ post }) => {
     <div className="post">
       <div className="user-section">
         <div className="left-section">
-          <div className="profile-icon">
-            {post.firstName[0] + post.lastName[0]}
+          <div
+            className="profile-icon"
+            style={{ backgroundColor: post?.profilePic && 'unset' }}
+          >
+            {post?.profilePic ? (
+              <img src={post?.profilePic} alt="profile-pic" />
+            ) : (
+              post.firstName[0] + post.lastName[0]
+            )}
           </div>
           <div className="user-name">
             {post.firstName + ' ' + post.lastName}
