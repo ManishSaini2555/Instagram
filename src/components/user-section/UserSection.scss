@@ -1,4 +1,70 @@
 @import '@styles/colors.scss';
 
 .user-section {
+  width: 70%;
+  .user-details {
+    margin-top: 3rem;
+    display: flex;
+    height: 10rem;
+    .profile-pic {
+      flex: 2;
+      display: flex;
+      justify-content: center;
+      .image-container {
+        height: 100%;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border-radius: 50%;
+        display: flex;
+        .profile-fallback {
+          height: 100%;
+          width: 100%;
+          font-size: 3rem;
+          font-weight: 500;
+          color: #838383;
+          justify-content: center;
+          display: flex;
+          align-items: center;
+          background: beige;
+        }
+      }
+    }
+    .account-info {
+      flex: 5;
+      display: flex;
+      flex-direction: column;
+      > div {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        span {
+          flex: 1;
+        }
+      }
+      .row-one {
+        .mail {
+          font-size: 1.125rem;
+          font-weight: 500;
+        }
+        .edit-button {
+          cursor: pointer;
+          font-size: 0.875rem;
+          font-weight: 600;
+          padding: 0.4rem 1rem;
+          border-radius: 0.5rem;
+          background-color: #363636;
+        }
+      }
+      .row-two {
+        span {
+          font-size: 1rem;
+          font-weight: 500;
+        }
+      }
+      .row-three {
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+    }
+  }
 }

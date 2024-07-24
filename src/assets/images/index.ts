@@ -11,7 +11,7 @@ import InstagramWordWhite from './instagram-white-logo.svg'
 import HomeIcon from './Home-icon.svg'
 import SearchIcon from './Search-icon.svg'
 import CreateIcon from './Create-icon.svg'
-import ReelsIcon from './Reels-icon.svg'
+import ChatIcon from './Chat-icon.svg'
 import MoreIcon from './More-icon.svg'
 import LikeIcon from './Like-icon.svg'
 import SaveIcon from './Save-icon.svg'
@@ -21,6 +21,7 @@ import ThreeDotsIcon from './Three-dots-icon.svg'
 import LikedIcon from './Liked-icon.svg'
 import LogOutIcon from './LogOut-icon.svg'
 import MainLogo from './Main-logo.jpeg'
+import ProfileLogo from './Profile-icon.svg'
 
 export {
   SpinnerGif,
@@ -36,7 +37,7 @@ export {
   HomeIcon,
   SearchIcon,
   CreateIcon,
-  ReelsIcon,
+  ChatIcon,
   MoreIcon,
   LikeIcon,
   CrossIcon,
@@ -45,5 +46,6 @@ export {
   ThreeDotsIcon,
   LikedIcon,
   LogOutIcon,
-  MainLogo
+  MainLogo,
+  ProfileLogo
 }

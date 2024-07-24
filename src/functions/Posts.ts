@@ -1,5 +1,4 @@
 import {
-  commentType,
   newCommentType,
   newPostType,
   postType,

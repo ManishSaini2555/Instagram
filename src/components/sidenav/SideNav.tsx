@@ -2,11 +2,12 @@ import React from 'react'
 import './SideNav.scss'
 import { logOut } from '@src/functions/Auth'
 import {
+  ChatIcon,
   CreateIcon,
   HomeIcon,
   LogOutIcon,
   MainLogo,
-  ReelsIcon,
+  ProfileLogo,
   SearchIcon
 } from '@images'
 import { useNavigate } from 'react-router-dom'
@@ -47,11 +48,11 @@ const SideNav: React.FC<SideNavType> = ({ setShowAddPost }) => {
           <span className="nav-text">Search</span>
         </div>
         <div className="nav-item">
-          <img src={ReelsIcon} height={26} className="icon-nav" />
-          <span className="nav-text">Reels</span>
+          <img src={ChatIcon} height={26} className="icon-nav" />
+          <span className="nav-text">Chat</span>
         </div>
         <div className="nav-item" onClick={() => setShowAddPost(true)}>
-          <img src={CreateIcon} height={26} className="icon-nav" />
+          <img src={CreateIcon} height={24} className="icon-nav" />
           <span className="nav-text">Create</span>
         </div>
         <div
@@ -62,7 +63,7 @@ const SideNav: React.FC<SideNavType> = ({ setShowAddPost }) => {
             })
           }
         >
-          <img src={HomeIcon} height={26} className="icon-nav" />
+          <img src={ProfileLogo} height={20} className="icon-nav" />
           <span className="nav-text">Profile</span>
         </div>
       </div>
