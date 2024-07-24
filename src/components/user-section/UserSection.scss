@@ -6,6 +6,7 @@
     margin-top: 3rem;
     display: flex;
     height: 10rem;
+    gap: 1rem;
     .profile-pic {
       flex: 2;
       display: flex;
@@ -42,6 +43,7 @@
         flex: 1;
         display: flex;
         align-items: center;
+        gap: 1rem;
         span {
           flex: 1;
         }
@@ -71,5 +73,48 @@
         font-weight: 600;
       }
     }
+  }
+}
+
+@media (max-width: 1200px) {
+  .user-section {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .user-section {
+    width: 90%;
+  }
+}
+
+@media (max-width: 850px) {
+  .user-section {
+    width: 100%;
+  }
+}
+
+@media (max-width: 750px) {
+  .user-details {
+    flex-direction: column;
+  }
+  .row-two {
+    display: none !important;
+  }
+  .account-info {
+    flex: 1 !important;
+    flex-direction: column-reverse !important;
+  }
+  .profile-pic {
+    flex: 1 !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .row-one {
+    flex-direction: column;
+  }
+  .row-three {
+    flex-direction: column;
   }
 }
