@@ -26,6 +26,12 @@ export const getAllPosts = async () => {
   return tempArray
 }
 
+export const getUserPosts = async (uid: string) => {
+  const posts = await readAllData('posts')
+  const tempArray = posts.filter((post: postType) => post.uid == uid)
+  return tempArray
+}
+
 export const createNewPost = async (post: postType, image: File) => {
   try {
     let postUrl = ''

@@ -74,6 +74,65 @@
       }
     }
   }
+  .user-posts {
+    padding: 1rem 0;
+    .catagory-section.mobile {
+      display: none;
+    }
+    .catagory-section {
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid #262626;
+      .mobile-content-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
+        .count {
+          font-size: 1rem;
+          font-weight: 700;
+        }
+        .text {
+          font-size: 0.875rem;
+        }
+      }
+      .item {
+        padding: 1rem 0;
+        color: #a8a8a8;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        img {
+          opacity: 0.5;
+        }
+      }
+      .active {
+        border-top: 1px solid #f5f5f5;
+        color: #ffffff;
+        font-weight: 600;
+        img {
+          opacity: 1;
+        }
+      }
+    }
+    .grid-container {
+      display: grid;
+      width: 100%;
+      grid-template-columns: auto auto auto;
+      gap: 2px;
+      .grid-item {
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        aspect-ratio: 1;
+        img {
+          height: 99%;
+          width: 99%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 1200px) {
@@ -97,6 +156,10 @@
 @media (max-width: 750px) {
   .user-details {
     flex-direction: column;
+    height: 15rem !important;
+  }
+  .catagory-section.mobile {
+    display: flex !important;
   }
   .row-two {
     display: none !important;
@@ -107,11 +170,14 @@
   }
   .profile-pic {
     flex: 1 !important;
-    height: inherit;
+    height: 70%;
   }
 }
 
 @media (max-width: 500px) {
+  .profile-pic {
+    height: 62%;
+  }
   .row-one {
     flex-direction: column;
   }

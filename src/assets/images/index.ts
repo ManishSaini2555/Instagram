@@ -22,6 +22,7 @@ import LikedIcon from './Liked-icon.svg'
 import LogOutIcon from './LogOut-icon.svg'
 import MainLogo from './Main-logo.jpeg'
 import ProfileLogo from './Profile-icon.svg'
+import PostLogo from './Post-icon.svg'
 
 export {
   SpinnerGif,
@@ -47,5 +48,6 @@ export {
   LikedIcon,
   LogOutIcon,
   MainLogo,
-  ProfileLogo
+  ProfileLogo,
+  PostLogo
 }
