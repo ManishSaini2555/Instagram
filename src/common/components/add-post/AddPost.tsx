@@ -19,6 +19,7 @@ const AddPost: React.FC<{
         uid: user?.uid,
         post: '',
         like: [],
+        save: [],
         comment: [],
         timeStamp: new Date().toISOString()
       }

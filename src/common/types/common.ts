@@ -13,6 +13,7 @@ export interface postType {
   uid: string
   post: string
   like: string[]
+  save: string[]
   comment: commentType[]
 }
 
@@ -22,6 +23,7 @@ export interface postTypeWithNewComment {
   uid: string
   post: string
   like: string[]
+  save: string[]
   comment: newCommentType[]
 }
 

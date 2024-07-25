@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './ContentPost.scss'
-import { LikeIcon, LikedIcon, SaveIcon } from '@src/assets/images'
+import { LikeIcon, LikedIcon, SaveIcon, SavedIcon } from '@src/assets/images'
 import { newPostType, postType } from '@src/common/types'
 import { displayDifferenceInterval } from '@src/common/utils'
 import { updatePost } from '@src/functions/Posts'
@@ -14,6 +14,7 @@ const ContentPost: React.FC<ContentPostType> = ({ post }) => {
   const [comment, setComment] = useState<string>('')
   const [showComment, setShowComment] = useState<boolean>(false)
   const [isLiked, setIsLiked] = useState<boolean>(false)
+  const [isSaved, setIsSaved] = useState<boolean>(false)
   const [likeCount, setLikeCount] = useState<number>(0)
 
   const likePost = async () => {
@@ -24,6 +25,7 @@ const ContentPost: React.FC<ContentPostType> = ({ post }) => {
         timeStamp: post.timeStamp,
         uid: post.uid,
         post: post.post,
+        save: post.save,
         like: [...post.like, user.uid],
         comment: post.comment
       }
@@ -43,11 +45,49 @@ const ContentPost: React.FC<ContentPostType> = ({ post }) => {
         timeStamp: post.timeStamp,
         uid: post.uid,
         post: post.post,
+        save: post.save,
         like: post.like.filter((id) => id != user.uid),
         comment: post.comment
       }
       setIsLiked(!isLiked)
       setLikeCount(likeCount - 1)
+      await updatePost(tempPayoad, 'Post unliked successfully')
+    } finally {
+      setLoading(false)
+    }
+  }
+  const savePost = async () => {
+    try {
+      setLoading(true)
+      const tempPayoad: postType = {
+        id: post.id,
+        timeStamp: post.timeStamp,
+        uid: post.uid,
+        post: post.post,
+        save: [...post.save, user.uid],
+        like: post.like,
+        comment: post.comment
+      }
+      setIsSaved(!isSaved)
+      await updatePost(tempPayoad, 'Post saved successfully')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const unSavePost = async () => {
+    try {
+      setLoading(true)
+      const tempPayoad: postType = {
+        id: post.id,
+        timeStamp: post.timeStamp,
+        uid: post.uid,
+        post: post.post,
+        save: post.save.filter((id) => id != user.uid),
+        like: post.like,
+        comment: post.comment
+      }
+      setIsSaved(!isSaved)
       await updatePost(tempPayoad, 'Post unliked successfully')
     } finally {
       setLoading(false)
@@ -63,6 +103,7 @@ const ContentPost: React.FC<ContentPostType> = ({ post }) => {
         uid: post.uid,
         post: post.post,
         like: post.like,
+        save: post.save,
         comment: [
           ...post.comment,
           { uid: user.uid, value: comment, timeStamp: new Date().toISOString() }
@@ -76,8 +117,9 @@ const ContentPost: React.FC<ContentPostType> = ({ post }) => {
   }
 
   useEffect(() => {
-    setIsLiked(post.like.some((item) => item === user.uid))
-    setLikeCount(post.like.length)
+    setIsLiked(post?.like?.some((item) => item === user?.uid))
+    setIsSaved(post?.save?.some((item) => item === user?.uid))
+    setLikeCount(post?.like?.length)
   }, [])
   return (
     <div className="post">
@@ -124,7 +166,21 @@ const ContentPost: React.FC<ContentPostType> = ({ post }) => {
               onClick={likePost}
             />
           )}
-          <img src={SaveIcon} height={30} className="save" />
+          {isSaved ? (
+            <img
+              src={SavedIcon}
+              height={26}
+              className="saved"
+              onClick={unSavePost}
+            />
+          ) : (
+            <img
+              src={SaveIcon}
+              height={26}
+              className="save"
+              onClick={savePost}
+            />
+          )}
         </div>
         <div className="like-count"> {likeCount} likes</div>
         {showComment ? (

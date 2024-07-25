@@ -21,7 +21,7 @@ export const getAllPosts = async () => {
       const user = users?.find((user: userType) => user?.uid === comment?.uid)
       comment.user = user?.firstName[0] + user.lastName[0]
     })
-    tempArray.push({ ...post, ...user })
+    tempArray.push({ ...user, ...post })
   })
   return tempArray
 }
@@ -29,6 +29,13 @@ export const getAllPosts = async () => {
 export const getUserPosts = async (uid: string) => {
   const posts = await readAllData('posts')
   const tempArray = posts.filter((post: postType) => post.uid == uid)
+  return tempArray
+}
+export const getUserSavedPosts = async (uid: string) => {
+  const posts = await readAllData('posts')
+  const tempArray = posts.filter((post: postType) =>
+    post.save?.some((item) => item === uid)
+  )
   return tempArray
 }
 

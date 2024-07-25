@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './UserSection.scss'
 import { UserAuth } from '@src/context/AuthContext'
 import ChangeProfile from '@src/common/components/change-profile/ChangeProfile'
-import { getUserPosts } from '@src/functions/Posts'
+import { getUserPosts, getUserSavedPosts } from '@src/functions/Posts'
 import { postType } from '@src/common/types'
 import { PostLogo, SaveIcon } from '@src/assets/images'
 
@@ -14,10 +14,14 @@ const UserSection: React.FC<{}> = () => {
   const [showPosts, setShowPosts] = useState<boolean>(true)
 
   useEffect(() => {
-    if (user)
+    if (user) {
       getUserPosts(user?.uid).then((data: postType[]) => {
         if (data?.length) setPosts(data)
       })
+      getUserSavedPosts(user?.uid).then((data: postType[]) => {
+        if (data?.length) setSaved(data)
+      })
+    }
   }, [])
 
   return (
