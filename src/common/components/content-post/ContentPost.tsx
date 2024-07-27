@@ -194,7 +194,13 @@ const ContentPost: React.FC<ContentPostType> = ({ post }) => {
             <div className="comments">
               {post.comment.map((comment, index) => (
                 <div key={index} className="comment-item">
-                  <span className="comment-name">{comment.user}</span>
+                  <span className="comment-name">
+                    {comment?.profile ? (
+                      <img src={comment?.profile} alt="profile-pic" />
+                    ) : (
+                      comment.user
+                    )}
+                  </span>
                   <span className="comment-text">{comment.value}</span>
                 </div>
               ))}

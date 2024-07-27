@@ -20,6 +20,7 @@ export const getAllPosts = async () => {
     post.comment.forEach((comment: newCommentType) => {
       const user = users?.find((user: userType) => user?.uid === comment?.uid)
       comment.user = user?.firstName[0] + user.lastName[0]
+      comment.profile = user?.profilePic
     })
     tempArray.push({ ...user, ...post })
   })

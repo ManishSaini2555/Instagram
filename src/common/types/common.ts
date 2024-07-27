@@ -35,6 +35,7 @@ export interface commentType {
 
 export interface newCommentType extends commentType {
   user: string
+  profile: string
 }
 
 export interface newPostType extends postTypeWithNewComment, userType {}

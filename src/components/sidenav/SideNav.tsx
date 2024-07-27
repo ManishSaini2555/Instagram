@@ -66,7 +66,7 @@ const SideNav: React.FC<SideNavType> = ({ setShowAddPost }) => {
           }
         >
           {user?.profilePic ? (
-            <div className="profile">
+            <div className="profile icon-nav">
               <img src={user?.profilePic} alt="profile-pic" />
             </div>
           ) : (
