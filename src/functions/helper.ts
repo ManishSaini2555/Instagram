@@ -11,11 +11,15 @@ import {
 import { db } from '../firebase/fire'
 import { v4 } from 'uuid'
 
-export const createData = async (collectionName: any, data: any) => {
+export const createData = async (
+  collectionName: any,
+  data: any,
+  setId?: string
+) => {
   const id = v4()
   try {
-    const docRef = doc(db, collectionName, id)
-    await setDoc(docRef, { ...data, id })
+    const docRef = doc(db, collectionName, setId ? setId : id)
+    await setDoc(docRef, { ...data, id: setId ? setId : id })
   } catch (error: any) {
     console.error(error?.message ? error.message : error)
     throw new Error(error)

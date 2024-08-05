@@ -39,3 +39,10 @@ export interface newCommentType extends commentType {
 }
 
 export interface newPostType extends postTypeWithNewComment, userType {}
+
+export interface relationshipsType {
+  uid: string
+  friends: string[]
+  requestRecieved: string[]
+  requestSent: string[]
+}

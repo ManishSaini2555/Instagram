@@ -45,11 +45,25 @@ const SideNav: React.FC<SideNavType> = ({ setShowAddPost }) => {
           <img src={HomeIcon} height={26} className="icon-nav" />
           <span className="nav-text">Home</span>
         </div>
-        <div className="nav-item">
+        <div
+          className="nav-item"
+          onClick={() =>
+            navigate({
+              pathname: LoggedInRoutesEnum.SEARCH
+            })
+          }
+        >
           <img src={SearchIcon} height={26} className="icon-nav" />
           <span className="nav-text">Search</span>
         </div>
-        <div className="nav-item">
+        <div
+          className="nav-item"
+          onClick={() =>
+            navigate({
+              pathname: LoggedInRoutesEnum.CHAT
+            })
+          }
+        >
           <img src={ChatIcon} height={26} className="icon-nav" />
           <span className="nav-text">Chat</span>
         </div>

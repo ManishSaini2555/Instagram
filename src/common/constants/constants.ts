@@ -13,6 +13,8 @@ export enum LoggedOutRoutesEnum {
 export enum LoggedInRoutesEnum {
   HOME = '/',
   PROFILE = '/profile',
+  SEARCH = '/search',
+  CHAT = '/chat',
   DEFAULT = '/*'
 }
 

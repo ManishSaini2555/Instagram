@@ -9,6 +9,8 @@ import {
 } from 'firebase/auth'
 import { db, auth } from '@src/firebase/fire'
 import { doc, setDoc } from 'firebase/firestore'
+import { readData } from './helper'
+import { createRelationships } from './Relationships'
 
 const provider = new GoogleAuthProvider()
 
@@ -44,6 +46,8 @@ export const signInWithGoogle = async () => {
       email: details?.profile?.email,
       phoneNumber: user?.phoneNumber
     }
+    if (!(await readData('users', user.uid)))
+      await createRelationships(user.uid)
     await setDoc(doc(db, 'users', user.uid), {
       uid: user.uid,
       ...userData
@@ -78,6 +82,7 @@ export const signUp = async (
       uid: user.user.uid,
       ...userData
     })
+    await createRelationships(user.user.uid)
     return user.user
   } catch (error) {
     throw error
