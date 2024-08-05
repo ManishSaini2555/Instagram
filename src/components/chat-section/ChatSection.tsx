@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import './ChatSection.scss'
 import { UserAuth } from '@src/context/AuthContext'
 import {
+  acceptFriendRequest,
   getRelationships,
   getUserByUid,
-  sendFriendRequest
+  rejectFriendRequest,
+  unFriend
 } from '@src/functions/Relationships'
 import { relationshipsType, userType } from '@src/common/types'
 import Friend from '@src/common/components/friend/Friend'
@@ -21,10 +23,37 @@ const ChatSection: React.FC<{}> = () => {
   >([])
   const [friendRequests, setfriendRequests] = useState<userType[]>([])
 
-  const requestSendClick = async (recieverId: string) => {
+  const acceptClick = async (sender: string) => {
     try {
       setLoading(true)
-      await sendFriendRequest(user.uid, recieverId)
+      await acceptFriendRequest(sender, user.uid)
+      setLoading(false)
+    } catch (err) {
+      setLoading(false)
+    }
+  }
+  const rejectClick = async (sender: string) => {
+    try {
+      setLoading(true)
+      await rejectFriendRequest(sender, user.uid)
+      setLoading(false)
+    } catch (err) {
+      setLoading(false)
+    }
+  }
+  const revokeClick = async (reciever: string) => {
+    try {
+      setLoading(true)
+      await rejectFriendRequest(user.uid, reciever)
+      setLoading(false)
+    } catch (err) {
+      setLoading(false)
+    }
+  }
+  const unFriendClick = async (friendId: string) => {
+    try {
+      setLoading(true)
+      await unFriend(user.uid, friendId)
       setLoading(false)
     } catch (err) {
       setLoading(false)
@@ -84,7 +113,10 @@ const ChatSection: React.FC<{}> = () => {
               {friendRequests.map((friend: any) => (
                 <Friend
                   friend={friend}
-                  acceptFriendRequest={requestSendClick}
+                  acceptFriendRequest={acceptClick}
+                  rejectFriendRequest={rejectClick}
+                  revokeFriendRequest={() => {}}
+                  unfriend={() => {}}
                   friendStatus={friendStatus}
                 />
               ))}
@@ -98,7 +130,10 @@ const ChatSection: React.FC<{}> = () => {
               {pendingRequestFriends.map((friend: any) => (
                 <Friend
                   friend={friend}
-                  acceptFriendRequest={requestSendClick}
+                  acceptFriendRequest={() => {}}
+                  rejectFriendRequest={() => {}}
+                  revokeFriendRequest={revokeClick}
+                  unfriend={() => {}}
                   friendStatus={friendStatus}
                 />
               ))}
@@ -112,7 +147,10 @@ const ChatSection: React.FC<{}> = () => {
               {friends.map((friend: any) => (
                 <Friend
                   friend={friend}
-                  acceptFriendRequest={requestSendClick}
+                  acceptFriendRequest={() => {}}
+                  rejectFriendRequest={() => {}}
+                  revokeFriendRequest={() => {}}
+                  unfriend={unFriendClick}
                   friendStatus={friendStatus}
                 />
               ))}

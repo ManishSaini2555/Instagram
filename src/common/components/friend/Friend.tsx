@@ -5,8 +5,9 @@ import { userType } from '@src/common/types'
 interface friendType {
   friend: userType
   acceptFriendRequest: (id: string) => void
-  rejectFriendRequest?: (id: string) => void
-  revokeFriendRequest?: (id: string) => void
+  rejectFriendRequest: (id: string) => void
+  revokeFriendRequest: (id: string) => void
+  unfriend: (id: string) => void
   friendStatus: (id: string) => string
 }
 const Friend: React.FC<friendType> = ({
@@ -14,6 +15,7 @@ const Friend: React.FC<friendType> = ({
   acceptFriendRequest,
   rejectFriendRequest,
   revokeFriendRequest,
+  unfriend,
   friendStatus
 }) => {
   return (
@@ -37,14 +39,16 @@ const Friend: React.FC<friendType> = ({
               <button onClick={() => acceptFriendRequest(friend?.uid)}>
                 Accept Request
               </button>
-              <button onClick={() => acceptFriendRequest(friend?.uid)}>
+              <button onClick={() => rejectFriendRequest(friend?.uid)}>
                 Reject Request
               </button>
             </>
           ) : friendStatus(friend?.uid) === 'Request Sent' ? (
-            <button>Revoke Request</button>
+            <button onClick={() => revokeFriendRequest(friend?.uid)}>
+              Revoke Request
+            </button>
           ) : friendStatus(friend?.uid) === 'Friend' ? (
-            <button>Unfriend</button>
+            <button onClick={() => unfriend(friend?.uid)}>Unfriend</button>
           ) : (
             <></>
           )}

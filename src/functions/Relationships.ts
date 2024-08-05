@@ -48,18 +48,53 @@ export const sendFriendRequest = async (sender: string, reciever: string) => {
     toast.error(err?.message)
   }
 }
-
-export const acceptFriendRequest = async (
-  updateMessage: string,
-  image: File,
-  user: any
-) => {
+export const acceptFriendRequest = async (sender: string, reciever: string) => {
   try {
-    const imageRef = ref(storage, `profile/${v4()}`)
-    const snapshot = await uploadBytes(imageRef, image)
-    const url = await getDownloadURL(snapshot.ref)
-    await updateData('users', { ...user, profilePic: url }, user.uid)
-    toast.success(updateMessage)
+    const senderData: relationshipsType = await getRelationships(sender)
+    const recieverData: relationshipsType = await getRelationships(reciever)
+    senderData!.requestSent = senderData!.requestSent!.filter(
+      (id: string) => id != reciever
+    )
+    recieverData!.requestRecieved = recieverData!.requestRecieved!.filter(
+      (id: string) => id != sender
+    )
+    senderData?.friends?.push(reciever)
+    recieverData?.friends?.push(sender)
+    await updateData('relationships', { ...senderData }, sender)
+    await updateData('relationships', { ...recieverData }, reciever)
+    toast.success('Friend request sent')
+  } catch (err: any) {
+    toast.error(err?.message)
+  }
+}
+
+export const rejectFriendRequest = async (sender: string, reciever: string) => {
+  try {
+    const senderData: relationshipsType = await getRelationships(sender)
+    const recieverData: relationshipsType = await getRelationships(reciever)
+    senderData!.requestSent = senderData!.requestSent!.filter(
+      (id: string) => id != reciever
+    )
+    recieverData!.requestRecieved = recieverData!.requestRecieved!.filter(
+      (id: string) => id != sender
+    )
+    await updateData('relationships', { ...senderData }, sender)
+    await updateData('relationships', { ...recieverData }, reciever)
+    toast.success('Friend request sent')
+  } catch (err: any) {
+    toast.error(err?.message)
+  }
+}
+
+export const unFriend = async (friend1Id: string, friend2Id: string) => {
+  try {
+    const friend1: relationshipsType = await getRelationships(friend1Id)
+    const friend2: relationshipsType = await getRelationships(friend2Id)
+    friend1!.friends = friend1!.friends!.filter((id: string) => id != friend2Id)
+    friend2!.friends = friend2!.friends!.filter((id: string) => id != friend1Id)
+    await updateData('relationships', { ...friend1 }, friend1Id)
+    await updateData('relationships', { ...friend2 }, friend2Id)
+    toast.success('Friend request sent')
   } catch (err: any) {
     toast.error(err?.message)
   }
