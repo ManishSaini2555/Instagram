@@ -22,7 +22,7 @@ export const getRelationships = async (id: any) => {
 export const createRelationships = async (id: any) => {
   try {
     const defaultData: relationshipsType = {
-      uid: `${id}`,
+      id,
       friends: [],
       requestRecieved: [],
       requestSent: []
@@ -83,5 +83,14 @@ export const searchUsers = async (userSearch: string) => {
     })
   } catch (err: any) {
     toast.error(err?.message)
+  }
+}
+
+export const getUserByUid = async (id: string) => {
+  try {
+    const user: userType = await readData('users', id)
+    return user
+  } catch (e: any) {
+    toast.error(e?.message)
   }
 }

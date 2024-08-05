@@ -59,6 +59,7 @@
           flex-direction: column;
         }
         .actions {
+          display: flex;
           button:not([disabled]):hover {
             background-color: #1877f2;
           }

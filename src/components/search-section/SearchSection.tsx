@@ -27,9 +27,10 @@ const SearchSection: React.FC<{}> = () => {
   }
 
   const friendStatus = (id: string) => {
-    if (userRelation?.uid === id) return 'User Itself'
+    if (userRelation?.id === id) return 'User Itself'
     if (userRelation?.friends?.includes(id)) return 'Friend'
     if (userRelation?.requestSent?.includes(id)) return 'Request Sent'
+    if (userRelation?.requestRecieved?.includes(id)) return 'Request Recieved'
     return 'Add'
   }
 
@@ -94,6 +95,11 @@ const SearchSection: React.FC<{}> = () => {
                     <button disabled>Sent</button>
                   ) : friendStatus(friend.uid) === 'Friend' ? (
                     <button>Unfriend</button>
+                  ) : friendStatus(friend.uid) === 'Request Recieved' ? (
+                    <>
+                      <button>Accept Request</button>
+                      <button>Reject Request</button>
+                    </>
                   ) : (
                     <></>
                   )}

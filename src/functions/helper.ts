@@ -31,7 +31,8 @@ export const readData = async (collectionName: any, id: any) => {
     const docRef = doc(db, collectionName, id)
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
-      return docSnap.data()
+      const data: any = docSnap.data()
+      return data
     } else console.log('No such document exists !!')
   } catch (error: any) {
     console.error(

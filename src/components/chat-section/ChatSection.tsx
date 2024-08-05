@@ -3,18 +3,23 @@ import './ChatSection.scss'
 import { UserAuth } from '@src/context/AuthContext'
 import {
   getRelationships,
+  getUserByUid,
   sendFriendRequest
 } from '@src/functions/Relationships'
-import { relationshipsType } from '@src/common/types'
+import { relationshipsType, userType } from '@src/common/types'
+import Friend from '@src/common/components/friend/Friend'
+import Accordion from '@src/common/components/accordion/Accordion'
 
 const ChatSection: React.FC<{}> = () => {
   const { user, setLoading } = UserAuth()
   const [userRelation, setUserRelation] = useState<relationshipsType | null>(
     null
   )
-  const [friends, setFriends] = useState([])
-  const [pendingRequestFriends, setpendingRequestFriends] = useState([])
-  const [friendRequests, setfriendRequests] = useState([])
+  const [friends, setFriends] = useState<userType[]>([])
+  const [pendingRequestFriends, setpendingRequestFriends] = useState<
+    userType[]
+  >([])
+  const [friendRequests, setfriendRequests] = useState<userType[]>([])
 
   const requestSendClick = async (recieverId: string) => {
     try {
@@ -27,9 +32,10 @@ const ChatSection: React.FC<{}> = () => {
   }
 
   const friendStatus = (id: string) => {
-    if (userRelation?.uid === id) return 'User Itself'
+    if (userRelation?.id === id) return 'User Itself'
     if (userRelation?.friends?.includes(id)) return 'Friend'
     if (userRelation?.requestSent?.includes(id)) return 'Request Sent'
+    if (userRelation?.requestRecieved?.includes(id)) return 'Request Recieved'
     return 'Add'
   }
 
@@ -45,46 +51,73 @@ const ChatSection: React.FC<{}> = () => {
 
   useEffect(() => {
     if (userRelation) {
+      userRelation.friends?.forEach((friendId) => {
+        console.log('friendId: ', friendId)
+        getUserByUid(friendId).then((user) => {
+          if (user) setFriends([...friends, user])
+        })
+      })
+      userRelation.requestRecieved?.forEach((friendId) => {
+        console.log('requestRecieved: ', friendId)
+        getUserByUid(friendId).then((user) => {
+          if (user) setfriendRequests([...friendRequests, user])
+        })
+      })
+      userRelation.requestSent?.forEach((friendId) => {
+        console.log('requestSent: ', friendId)
+        getUserByUid(friendId).then((user) => {
+          if (user) setpendingRequestFriends([...pendingRequestFriends, user])
+        })
+      })
     }
   }, [userRelation])
 
   return (
     <>
       <div className="chat-section">
-        <div className="search-result">
-          {friends.map((friend: any) => (
-            <div key={friend.uid} className="user-item">
-              {/* <img src={user.profilePic} alt="profile-pic" /> */}
-              <span className="user-image">
-                {friend?.profilePic ? (
-                  <img src={friend?.profilePic} alt="profile-pic" />
-                ) : (
-                  friend?.firstName[0] + ' ' + friend?.lastName[0]
-                )}
-              </span>
-              <div className="details">
-                <div className="content">
-                  <span className="user-email">{friend?.email}</span>
-                  <span className="user-name">
-                    {friend?.firstName + ' ' + friend?.lastName}
-                  </span>
-                </div>
-                <div className="actions">
-                  {friendStatus(friend?.uid) === 'Add' ? (
-                    <button onClick={() => requestSendClick(friend?.uid)}>
-                      Send Request
-                    </button>
-                  ) : friendStatus(friend?.uid) === 'Request Sent' ? (
-                    <button disabled>Sent</button>
-                  ) : friendStatus(friend?.uid) === 'Friend' ? (
-                    <button>Unfriend</button>
-                  ) : (
-                    <></>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="friend-result">
+          {friendRequests.length > 0 && (
+            <Accordion
+              title="Friend Request"
+              isDefaultOpen={friends.length == 0}
+            >
+              {friendRequests.map((friend: any) => (
+                <Friend
+                  friend={friend}
+                  acceptFriendRequest={requestSendClick}
+                  friendStatus={friendStatus}
+                />
+              ))}
+            </Accordion>
+          )}
+          {pendingRequestFriends.length > 0 && (
+            <Accordion
+              title="Requests Sent"
+              isDefaultOpen={friends.length == 0 && friendRequests.length == 0}
+            >
+              {pendingRequestFriends.map((friend: any) => (
+                <Friend
+                  friend={friend}
+                  acceptFriendRequest={requestSendClick}
+                  friendStatus={friendStatus}
+                />
+              ))}
+            </Accordion>
+          )}
+          {friends.length > 0 && (
+            <Accordion
+              title="Active Friends"
+              isDefaultOpen={friends.length > 0}
+            >
+              {friends.map((friend: any) => (
+                <Friend
+                  friend={friend}
+                  acceptFriendRequest={requestSendClick}
+                  friendStatus={friendStatus}
+                />
+              ))}
+            </Accordion>
+          )}
         </div>
       </div>
     </>
