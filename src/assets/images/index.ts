@@ -24,6 +24,7 @@ import MainLogo from './Main-logo.jpeg'
 import ProfileLogo from './Profile-icon.svg'
 import PostLogo from './Post-icon.svg'
 import SavedIcon from './Saved-icon.svg'
+import FriendIcon from './Friend-icon.svg'
 
 export {
   SpinnerGif,
@@ -51,5 +52,6 @@ export {
   MainLogo,
   ProfileLogo,
   PostLogo,
-  SavedIcon
+  SavedIcon,
+  FriendIcon
 }

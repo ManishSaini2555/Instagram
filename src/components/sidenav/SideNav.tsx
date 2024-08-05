@@ -4,6 +4,7 @@ import { logOut } from '@src/functions/Auth'
 import {
   ChatIcon,
   CreateIcon,
+  FriendIcon,
   HomeIcon,
   LogOutIcon,
   MainLogo,
@@ -55,6 +56,17 @@ const SideNav: React.FC<SideNavType> = ({ setShowAddPost }) => {
         >
           <img src={SearchIcon} height={26} className="icon-nav" />
           <span className="nav-text">Search</span>
+        </div>
+        <div
+          className="nav-item"
+          onClick={() =>
+            navigate({
+              pathname: LoggedInRoutesEnum.FRIENDS
+            })
+          }
+        >
+          <img src={FriendIcon} height={26} className="icon-nav" />
+          <span className="nav-text">Friends</span>
         </div>
         <div
           className="nav-item"

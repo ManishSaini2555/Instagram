@@ -15,6 +15,7 @@ export enum LoggedInRoutesEnum {
   PROFILE = '/profile',
   SEARCH = '/search',
   CHAT = '/chat',
+  FRIENDS = '/friends',
   DEFAULT = '/*'
 }
 

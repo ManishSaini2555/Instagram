@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './ChatSection.scss'
+import './FriendsSection.scss'
 import { UserAuth } from '@src/context/AuthContext'
 import {
   acceptFriendRequest,
@@ -12,7 +12,7 @@ import { relationshipsType, userType } from '@src/common/types'
 import Friend from '@src/common/components/friend/Friend'
 import Accordion from '@src/common/components/accordion/Accordion'
 
-const ChatSection: React.FC<{}> = () => {
+const FriendsSection: React.FC<{}> = () => {
   const { user, setLoading } = UserAuth()
   const [userRelation, setUserRelation] = useState<relationshipsType | null>(
     null
@@ -162,4 +162,4 @@ const ChatSection: React.FC<{}> = () => {
   )
 }
 
-export default ChatSection
+export default FriendsSection
