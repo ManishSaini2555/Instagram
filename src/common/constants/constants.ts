@@ -3,6 +3,14 @@ export enum SignupLoginEnum {
   LOGIN = 'LOGIN'
 }
 
+export enum TableNameEnum {
+  USERS = 'users',
+  POSTS = 'posts',
+  RELATIONSHIPS = 'relationships',
+  CONVERSATIONS = 'conversations',
+  MESSAGES = 'messages'
+}
+
 export enum LoggedOutRoutesEnum {
   HOME = '/',
   CREATE_USER = '/create-user',

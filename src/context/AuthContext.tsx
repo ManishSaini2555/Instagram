@@ -1,3 +1,4 @@
+import { TableNameEnum } from '@src/common/constants/constants'
 import { auth, db } from '@src/firebase/fire'
 import { onAuthStateChanged } from 'firebase/auth'
 import { doc, onSnapshot } from 'firebase/firestore'
@@ -36,7 +37,7 @@ const UserAuthProvider: React.FC<{ children: React.ReactNode }> = ({
       if (currentUser) {
         console.log(currentUser)
         setIsLoggedIn(true)
-        onSnapshot(doc(db, 'users', currentUser.uid), (doc) => {
+        onSnapshot(doc(db, TableNameEnum.USERS, currentUser.uid), (doc) => {
           setUser(doc.data())
         })
       } else {

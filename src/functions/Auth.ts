@@ -11,6 +11,7 @@ import { db, auth } from '@src/firebase/fire'
 import { doc, setDoc } from 'firebase/firestore'
 import { readData } from './helper'
 import { createRelationships } from './Relationships'
+import { TableNameEnum } from '@src/common/constants/constants'
 
 const provider = new GoogleAuthProvider()
 
@@ -46,9 +47,9 @@ export const signInWithGoogle = async () => {
       email: details?.profile?.email,
       phoneNumber: user?.phoneNumber
     }
-    if (!(await readData('users', user.uid)))
+    if (!(await readData(TableNameEnum.USERS, user.uid)))
       await createRelationships(user.uid)
-    await setDoc(doc(db, 'users', user.uid), {
+    await setDoc(doc(db, TableNameEnum.USERS, user.uid), {
       uid: user.uid,
       ...userData
     })
@@ -78,7 +79,7 @@ export const signUp = async (
 ) => {
   try {
     const user = await createUserWithEmailAndPassword(auth, email, password)
-    await setDoc(doc(db, 'users', user.user.uid), {
+    await setDoc(doc(db, TableNameEnum.USERS, user.user.uid), {
       uid: user.user.uid,
       ...userData
     })
