@@ -44,7 +44,7 @@ const UserSection: React.FC<{}> = () => {
           </div>
           <div className="account-info">
             <div className="row-one">
-              <span className="mail">{user?.email}</span>
+              <span className="mail">{`${user?.firstName} ${user?.lastName}`}</span>
               <span className="edit-profile">
                 <span
                   className="edit-button"
@@ -58,7 +58,7 @@ const UserSection: React.FC<{}> = () => {
               <span className="post-count">{posts?.length} Posts</span>
               <span className="friends-count">6 Friends</span>
             </div>
-            <div className="row-three">{`${user?.firstName} ${user?.lastName}`}</div>
+            <div className="row-three">{user?.email}</div>
           </div>
         </div>
         <div className="user-posts">
@@ -90,9 +90,20 @@ const UserSection: React.FC<{}> = () => {
             {showPosts
               ? posts.map((post: postType) => {
                   return (
-                    <div className="grid-item">
-                      <img src={post.post} alt="post" />
-                    </div>
+                    <>
+                      <div className="grid-item">
+                        <img src={post.post} alt="post" />
+                      </div>
+                      <div className="grid-item">
+                        <img src={post.post} alt="post" />
+                      </div>
+                      <div className="grid-item">
+                        <img src={post.post} alt="post" />
+                      </div>
+                      <div className="grid-item">
+                        <img src={post.post} alt="post" />
+                      </div>
+                    </>
                   )
                 })
               : saved.map((post: postType) => {
