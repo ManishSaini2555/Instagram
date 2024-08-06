@@ -90,20 +90,9 @@ const UserSection: React.FC<{}> = () => {
             {showPosts
               ? posts.map((post: postType) => {
                   return (
-                    <>
-                      <div className="grid-item">
-                        <img src={post.post} alt="post" />
-                      </div>
-                      <div className="grid-item">
-                        <img src={post.post} alt="post" />
-                      </div>
-                      <div className="grid-item">
-                        <img src={post.post} alt="post" />
-                      </div>
-                      <div className="grid-item">
-                        <img src={post.post} alt="post" />
-                      </div>
-                    </>
+                    <div className="grid-item">
+                      <img src={post.post} alt="post" />
+                    </div>
                   )
                 })
               : saved.map((post: postType) => {
