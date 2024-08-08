@@ -8,7 +8,7 @@ const UserRoutes: React.FC<{}> = ({}) => {
   const Profile = lazy(async () => await import('@pages/profie/Profile'))
   const Search = lazy(async () => await import('@src/pages/search/Search'))
   const Chat = lazy(async () => await import('@src/pages/chat/Chat'))
-  const Friends = lazy(async () => await import('@src/pages/chat/Chat'))
+  const Friends = lazy(async () => await import('@src/pages/friends/Friends'))
   return (
     <div>
       <Suspense fallback={<Loader />}>

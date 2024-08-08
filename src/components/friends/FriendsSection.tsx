@@ -103,7 +103,7 @@ const FriendsSection: React.FC<{}> = () => {
 
   return (
     <>
-      <div className="chat-section">
+      <div className="friend-section">
         <div className="friend-result">
           {friendRequests.length > 0 && (
             <Accordion
@@ -115,8 +115,6 @@ const FriendsSection: React.FC<{}> = () => {
                   friend={friend}
                   acceptFriendRequest={acceptClick}
                   rejectFriendRequest={rejectClick}
-                  revokeFriendRequest={() => {}}
-                  unfriend={() => {}}
                   friendStatus={friendStatus}
                 />
               ))}
@@ -130,10 +128,7 @@ const FriendsSection: React.FC<{}> = () => {
               {pendingRequestFriends.map((friend: any) => (
                 <Friend
                   friend={friend}
-                  acceptFriendRequest={() => {}}
-                  rejectFriendRequest={() => {}}
                   revokeFriendRequest={revokeClick}
-                  unfriend={() => {}}
                   friendStatus={friendStatus}
                 />
               ))}
@@ -147,9 +142,6 @@ const FriendsSection: React.FC<{}> = () => {
               {friends.map((friend: any) => (
                 <Friend
                   friend={friend}
-                  acceptFriendRequest={() => {}}
-                  rejectFriendRequest={() => {}}
-                  revokeFriendRequest={() => {}}
                   unfriend={unFriendClick}
                   friendStatus={friendStatus}
                 />

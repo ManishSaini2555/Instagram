@@ -1,15 +1,21 @@
 import {
+  WhereFilterOp,
+  and,
   collection,
   deleteDoc,
   doc,
   getDoc,
   getDocs,
   onSnapshot,
+  or,
+  query,
   setDoc,
-  updateDoc
+  updateDoc,
+  where
 } from 'firebase/firestore'
 import { db } from '../firebase/fire'
 import { v4 } from 'uuid'
+import { conversationType } from '@src/common/types'
 
 export const createData = async (
   collectionName: any,
@@ -34,6 +40,98 @@ export const readData = async (collectionName: any, id: any) => {
       const data: any = docSnap.data()
       return data
     } else console.log('No such document exists !!')
+  } catch (error: any) {
+    console.error(
+      'Error reading document : ',
+      error?.message ? error.message : error
+    )
+  }
+}
+
+export const readDataWithSimpleQuery = async (
+  collectionName: any,
+  column: string,
+  condition: WhereFilterOp,
+  value: any
+) => {
+  try {
+    const docRef = collection(db, collectionName)
+    const q = query(docRef, where(column, condition, value))
+    const querySnapshot = await getDocs(q)
+    const data: any[] = querySnapshot.docs.map(
+      (doc) =>
+        ({
+          ...doc.data()
+        } as any)
+    )
+    return data
+  } catch (error: any) {
+    console.error(
+      'Error reading document : ',
+      error?.message ? error.message : error
+    )
+  }
+}
+
+export const readDataWithOrQuery = async (
+  collectionName: any,
+  column1: string,
+  condition1: WhereFilterOp,
+  value1: any,
+  column2: string,
+  condition2: WhereFilterOp,
+  value2: any
+) => {
+  try {
+    const docRef = collection(db, collectionName)
+    const q = query(
+      docRef,
+      or(where(column1, condition1, value1), where(column2, condition2, value2))
+    )
+    const querySnapshot = await getDocs(q)
+
+    const data: conversationType[] = querySnapshot.docs.map(
+      (doc) =>
+        ({
+          ...doc.data()
+        } as conversationType)
+    )
+    return data
+  } catch (error: any) {
+    console.error(
+      'Error reading document : ',
+      error?.message ? error.message : error
+    )
+  }
+}
+
+export const readDataWithAndQuery = async (
+  collectionName: any,
+  column1: string,
+  condition1: WhereFilterOp,
+  value1: any,
+  column2: string,
+  condition2: WhereFilterOp,
+  value2: any
+) => {
+  try {
+    const docRef = collection(db, collectionName)
+    const q = query(
+      docRef,
+      and(
+        where(column1, condition1, value1),
+        where(column2, condition2, value2)
+      )
+    )
+    const querySnapshot = await getDocs(q)
+
+    const data: conversationType[] = querySnapshot.docs.map(
+      (doc) =>
+        ({
+          ...doc.data()
+        } as conversationType)
+    )
+    return data
   } catch (error: any) {
     console.error(
       'Error reading document : ',
@@ -90,5 +188,12 @@ export const listenToCollection = (collectionName: string, callback: any) => {
       newDataArray.push(doc.data())
     })
     callback(newDataArray)
+  })
+}
+
+export const detectChanges = (collectionName: string, callback: any) => {
+  const collectionRef = collection(db, collectionName)
+  return onSnapshot(collectionRef, (querySnapshot) => {
+    callback()
   })
 }

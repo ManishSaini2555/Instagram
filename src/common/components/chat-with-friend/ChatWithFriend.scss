@@ -1,0 +1,111 @@
+@import '@styles/colors.scss';
+
+.chat-with-friend-section {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  .heading {
+    display: flex;
+    font-size: 1.25rem;
+    align-items: center;
+    font-weight: 700;
+    gap: 1rem;
+    .user-image {
+      color: #000000;
+      width: 3rem;
+      height: 3rem;
+      font-weight: 600;
+      font-size: 1.25rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      border-radius: 50%;
+      background-color: #2196f3;
+      justify-content: center;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    margin-bottom: 3.5rem;
+    border-radius: 1rem;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/instagram-56dab.appspot.com/o/images%2Fbackground-image.png?alt=media&token=eda4eceb-7e72-487e-b9f4-90899859307f');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    .message-section {
+      overflow-y: scroll;
+      padding: 0 0.5rem;
+      .message-content {
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .sender-message {
+        display: flex;
+        justify-content: end;
+        .message-content {
+          background-color: #083c0a;
+        }
+      }
+      .receiver-message {
+        display: flex;
+        justify-content: start;
+        .message-content {
+          background-color: #2c2b2b;
+        }
+      }
+    }
+    .text-field {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      gap: 0.5rem;
+      input {
+        -webkit-appearance: none;
+        border-radius: 0.5rem;
+        background-color: #363636;
+        margin: 0;
+        padding: 0.5rem;
+        border-style: none;
+        resize: none;
+        color: #f5f5f5;
+        outline: none;
+        width: 98%;
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .chat-with-friend-section {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .chat-with-friend-section {
+    width: 90%;
+  }
+}
+
+@media (max-width: 850px) {
+  .chat-with-friend-section {
+    width: 100%;
+  }
+}

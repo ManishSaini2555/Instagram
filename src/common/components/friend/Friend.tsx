@@ -4,17 +4,21 @@ import { userType } from '@src/common/types'
 
 interface friendType {
   friend: userType
-  acceptFriendRequest: (id: string) => void
-  rejectFriendRequest: (id: string) => void
-  revokeFriendRequest: (id: string) => void
-  unfriend: (id: string) => void
-  friendStatus: (id: string) => string
+  isChat?: boolean
+  acceptFriendRequest?: (id: string) => void
+  rejectFriendRequest?: (id: string) => void
+  revokeFriendRequest?: (id: string) => void
+  openChatWithFriend?: (friend: userType) => void
+  unfriend?: (id: string) => void
+  friendStatus?: (id: string) => string
 }
 const Friend: React.FC<friendType> = ({
   friend,
+  isChat = false,
   acceptFriendRequest,
   rejectFriendRequest,
   revokeFriendRequest,
+  openChatWithFriend,
   unfriend,
   friendStatus
 }) => {
@@ -33,26 +37,51 @@ const Friend: React.FC<friendType> = ({
             {friend?.firstName + ' ' + friend?.lastName}
           </span>
         </div>
-        <div className="actions">
-          {friendStatus(friend?.uid) === 'Request Recieved' ? (
-            <>
-              <button onClick={() => acceptFriendRequest(friend?.uid)}>
-                Accept Request
+        {!isChat ? (
+          <div className="actions">
+            {friendStatus &&
+            friendStatus(friend?.uid) === 'Request Recieved' ? (
+              <>
+                <button
+                  onClick={() =>
+                    acceptFriendRequest && acceptFriendRequest(friend?.uid)
+                  }
+                >
+                  Accept Request
+                </button>
+                <button
+                  onClick={() =>
+                    rejectFriendRequest && rejectFriendRequest(friend?.uid)
+                  }
+                >
+                  Reject Request
+                </button>
+              </>
+            ) : friendStatus && friendStatus(friend?.uid) === 'Request Sent' ? (
+              <button
+                onClick={() =>
+                  revokeFriendRequest && revokeFriendRequest(friend?.uid)
+                }
+              >
+                Revoke Request
               </button>
-              <button onClick={() => rejectFriendRequest(friend?.uid)}>
-                Reject Request
+            ) : friendStatus && friendStatus(friend?.uid) === 'Friend' ? (
+              <button onClick={() => unfriend && unfriend(friend?.uid)}>
+                Unfriend
               </button>
-            </>
-          ) : friendStatus(friend?.uid) === 'Request Sent' ? (
-            <button onClick={() => revokeFriendRequest(friend?.uid)}>
-              Revoke Request
+            ) : (
+              <></>
+            )}
+          </div>
+        ) : (
+          <div className="actions">
+            <button
+              onClick={() => openChatWithFriend && openChatWithFriend(friend)}
+            >
+              Open Chat
             </button>
-          ) : friendStatus(friend?.uid) === 'Friend' ? (
-            <button onClick={() => unfriend(friend?.uid)}>Unfriend</button>
-          ) : (
-            <></>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   )

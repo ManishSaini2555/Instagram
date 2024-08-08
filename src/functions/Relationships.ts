@@ -1,10 +1,13 @@
 import { toast } from 'react-toastify'
-import { storage } from '@src/firebase/fire'
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import { v4 } from 'uuid'
 import { createData, readAllData, readData, updateData } from './helper'
-import { relationshipsType, userType } from '@src/common/types'
+import {
+  conversationType,
+  relationshipsType,
+  userType
+} from '@src/common/types'
 import { TableNameEnum } from '@src/common/constants/constants'
+import { v4 } from 'uuid'
+import { getConversationId } from './Chat'
 
 export const getRelationships = async (id: any) => {
   try {
@@ -61,15 +64,19 @@ export const acceptFriendRequest = async (sender: string, reciever: string) => {
     )
     senderData?.friends?.push(reciever)
     recieverData?.friends?.push(sender)
-    const defaultData = {
-      user1_id: sender,
-      user2_id: reciever,
-      created_at: new Date().toISOString()
+    const data = await getConversationId(sender, reciever)
+    if (!data?.length) {
+      const defaultData: conversationType = {
+        id: v4(),
+        user1_id: sender,
+        user2_id: reciever,
+        created_at: new Date().toISOString()
+      }
+      await createData(TableNameEnum.CONVERSATIONS, defaultData)
     }
-    await createData(TableNameEnum.CONVERSATIONS, defaultData)
     await updateData(TableNameEnum.RELATIONSHIPS, { ...senderData }, sender)
     await updateData(TableNameEnum.RELATIONSHIPS, { ...recieverData }, reciever)
-    toast.success('Friend request sent')
+    toast.success('Friend request accepted successfully')
   } catch (err: any) {
     toast.error(err?.message)
   }
@@ -87,7 +94,7 @@ export const rejectFriendRequest = async (sender: string, reciever: string) => {
     )
     await updateData(TableNameEnum.RELATIONSHIPS, { ...senderData }, sender)
     await updateData(TableNameEnum.RELATIONSHIPS, { ...recieverData }, reciever)
-    toast.success('Friend request sent')
+    toast.success('Friend request rejected successfully')
   } catch (err: any) {
     toast.error(err?.message)
   }
@@ -101,7 +108,7 @@ export const unFriend = async (friend1Id: string, friend2Id: string) => {
     friend2!.friends = friend2!.friends!.filter((id: string) => id != friend1Id)
     await updateData(TableNameEnum.RELATIONSHIPS, { ...friend1 }, friend1Id)
     await updateData(TableNameEnum.RELATIONSHIPS, { ...friend2 }, friend2Id)
-    toast.success('Friend request sent')
+    toast.success('Unfriend successfully')
   } catch (err: any) {
     toast.error(err?.message)
   }

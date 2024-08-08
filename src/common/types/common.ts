@@ -46,3 +46,19 @@ export interface relationshipsType {
   requestRecieved: string[]
   requestSent: string[]
 }
+
+export interface conversationType {
+  id: string
+  user1_id: string
+  user2_id: string
+  created_at: string
+}
+
+export interface messageType {
+  id: string
+  conversation_id: string
+  sender_id: string
+  receiver_id: string
+  message: string
+  created_at: string
+}
